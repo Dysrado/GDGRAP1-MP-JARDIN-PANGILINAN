@@ -12,10 +12,11 @@
 //
 //#include <string>
 //#include <iostream>
-//#include "Camera/PerspectiveCamera.h"
-//#include "Camera/OrthoCamera.h"
 
-#include "Camera.h"
+
+//#include "Camera.h"
+#include "Camera/PerspectiveCamera.h"
+#include "Camera/OrthoCamera.h"
 #include "Skybox.h"
 #include "Model3D.h"
 #include "Player.h"
@@ -79,13 +80,16 @@ int main(void)
     float distance = 40.f;
     glm::mat4 identity = glm::mat4(1.f);
 
-    PerspectiveCamera* cam = new PerspectiveCamera();
+    bool inPers = true;
+    PerspectiveCamera* pCam = new PerspectiveCamera();
+    OrthoCamera* oCam = new OrthoCamera();
 
     // the object transform
     player->initVariables(glm::vec3(0, 0, -1), glm::vec3(1, 1, 1), glm::vec3(0.2f));
     debris1->initVariables(glm::vec3(0, 7, -30), glm::vec3(0, -45, 0), glm::vec3(0.5f));
 
-    cam->initialize(glm::vec3(0, 0, -1));
+    pCam->initialize(glm::vec3(0, 0, -1));
+    oCam->initialize(glm::vec3(0, 0, -1));
 
     // light
     glm::vec3 lightPos = glm::vec3(-10, 10, 5);
@@ -98,6 +102,7 @@ int main(void)
     float specPhong = 16.f;
 
     float lastTime = glfwGetTime();
+    float lastCDTime = glfwGetTime();
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -112,11 +117,16 @@ int main(void)
         float deltaTime = currTime - lastTime;
 
         // Update Uniforms for the Skybox
-        skybox->updateUniforms(cam->getView(), cam->getProj());
+        skybox->updateUniforms(pCam->getView(), pCam->getProj());
 
         // Update Uniforms for the Player Object
         player->updateUniforms();
-        cam->updateUniforms(player->getShader());
+        if (inPers) {
+            pCam->updateUniforms(player->getShader());
+        }
+        else {
+            oCam->updateUniforms(player->getShader());
+        }
 
         // Replace this when light is added ===============================================================
         // Lighting
@@ -143,7 +153,12 @@ int main(void)
 
         // for the debris
         debris1->updateUniforms();
-        cam->updateUniforms(debris1->getShader());
+        if (inPers) {
+            pCam->updateUniforms(debris1->getShader());
+        }
+        else {
+            oCam->updateUniforms(debris1->getShader());
+        }
 
         // Replace this when light is added ===============================================================
         // Lighting
@@ -175,22 +190,28 @@ int main(void)
         glfwPollEvents();
 
         //cam->processInput(window);
+        float cooldownTimer = glfwGetTime();
+        if (cooldownTimer > lastCDTime + 0.5f) {
+            if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+                lastCDTime = glfwGetTime();
+                if (inPers) {
+                    inPers = false;
+                }
+                else {
+                    inPers = true;
+                }
+            }
+        }
 
-        cam->update(window, deltaTime, player->getPosition());
-        //// Update Values for View Based on the Yaw and Pitch
-        //F.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-        //F.y = sin(glm::radians(pitch));
-        //F.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-
-        //F = glm::normalize(F);
-        //R = glm::normalize(glm::cross(F, WorldUp));
-        //U = glm::normalize(glm::cross(R, F));
-
-        //view = glm::lookAt(cameraPos, cameraPos + F, WorldUp);
-        player->setF(cam->getF());
-        player->setR(cam->getR());
-        player->update(window, deltaTime, true);
-
+        if (inPers) {
+            pCam->update(window, deltaTime, player->getPosition());
+            player->setF(pCam->getF());
+            player->setR(pCam->getR());
+            player->update(window, deltaTime, true);
+        }
+        else {
+            oCam->update(window, deltaTime, player->getPosition());
+        }
 
         lastTime = currTime;
     }

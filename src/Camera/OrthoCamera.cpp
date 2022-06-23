@@ -10,7 +10,7 @@ void OrthoCamera::initialize(glm::vec3 centerPos)
     glm::vec3 WorldUp = glm::vec3(0, 1, 0);
 
     // sets the clipping space of the camera
-	projection = glm::ortho(-100.f, 100.f, -100.f, 100.f, 0.01f, 100.f);
+	projection = glm::ortho(-200.f, 200.f, -200.f, 200.f, 0.01f, 100.f);
 
     glm::vec3 F = glm::normalize(centerPos - this->cameraPos);
 
