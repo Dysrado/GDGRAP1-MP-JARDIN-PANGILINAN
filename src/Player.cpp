@@ -10,6 +10,7 @@ Player::~Player()
 	Model3D::~Model3D();
 }
 
+/* Getters and Setters */
 glm::vec3 Player::getPosition()
 {
     return this->pos;
@@ -27,7 +28,7 @@ void Player::setR(glm::vec3 value)
 
 void Player::update(GLFWwindow* window, float deltaTime, bool canMove)
 {
-    float mag;
+    // Based on the F and R move the obj accordingly
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // Move Forward
         pos.x -= F.x * SPEED * deltaTime;
         pos.z -= F.z * SPEED * deltaTime;

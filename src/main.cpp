@@ -45,8 +45,10 @@ int main(void)
     glfwMakeContextCurrent(window);
     gladLoadGL();
 
+    // Create Skybox
     Skybox* skybox = new Skybox();
 
+    // Create Player
     // Parameters for the Model3D "obj path, texture path, rgba or rgb, .vert path, .frag path, isPlayer"
     Player* player = new Player(
         "3D/Models/UFO.obj",
@@ -58,6 +60,7 @@ int main(void)
     );// Model Source: https://www.turbosquid.com/3d-models/free-3ds-model-flying-saucer/1081073#
     player->initialize();
 
+    // Create 1st Debris
     Model3D* debris1 = new Model3D(
         "3D/Models/sphere.obj",
         "3D/Textures/planet.jpg",
@@ -71,7 +74,7 @@ int main(void)
     // enables depth test
     glEnable(GL_DEPTH_TEST);
 
-    // Insert skybox here
+    // Initializes the variables and shaders for the skybox
     skybox->initialize("Shaders/skybox.vert", "Shaders/skybox.frag");
     skybox->bindBuffers();
 
@@ -80,6 +83,7 @@ int main(void)
     float distance = 40.f;
     glm::mat4 identity = glm::mat4(1.f);
 
+    // Initialize cameras
     bool inPers = true;
     PerspectiveCamera* pCam = new PerspectiveCamera();
     OrthoCamera* oCam = new OrthoCamera();
@@ -88,6 +92,7 @@ int main(void)
     player->initVariables(glm::vec3(0, 0, -1), glm::vec3(1, 1, 1), glm::vec3(0.2f));
     debris1->initVariables(glm::vec3(0, 7, -30), glm::vec3(0, -45, 0), glm::vec3(0.5f));
 
+    // Initialize the values needed for the camera
     pCam->initialize(glm::vec3(0, 0, -1));
     oCam->initialize(glm::vec3(0, 0, -1));
 
@@ -102,7 +107,7 @@ int main(void)
     float specPhong = 16.f;
 
     float lastTime = glfwGetTime();
-    float lastCDTime = glfwGetTime();
+    float lastCDTime = glfwGetTime(); // Last time the camera was swaped
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -112,6 +117,7 @@ int main(void)
 
         /* Current Time */
         GLfloat currTime = glfwGetTime();
+        float cooldownTimer = glfwGetTime(); // Used for the cooldown for swaping cameras
 
         /* Time that has passed */
         float deltaTime = currTime - lastTime;
@@ -190,10 +196,9 @@ int main(void)
         glfwPollEvents();
 
         //cam->processInput(window);
-        float cooldownTimer = glfwGetTime();
-        if (cooldownTimer > lastCDTime + 0.5f) {
+        if (cooldownTimer > lastCDTime + 0.5f) { // in 0.5 seconds you can change cameras
             if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-                lastCDTime = glfwGetTime();
+                lastCDTime = glfwGetTime(); // Resets the timer
                 if (inPers) {
                     inPers = false;
                 }
@@ -203,7 +208,7 @@ int main(void)
             }
         }
 
-        if (inPers) {
+        if (inPers) { // Allows movement during perspective mode
             pCam->update(window, deltaTime, player->getPosition());
             player->setF(pCam->getF());
             player->setR(pCam->getR());
@@ -218,6 +223,8 @@ int main(void)
 
     delete player;
     delete debris1;
+    delete pCam;
+    delete oCam;
 
     skybox->deleteBuffers();
 
