@@ -146,11 +146,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\MyCamera.cpp" />
+    <ClCompile Include="Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="Dependencies\include\glm\detail\glm.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model3D.cpp" />
+    <ClCompile Include="Skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base.h" />
+    <ClInclude Include="Camera\MyCamera.h" />
+    <ClInclude Include="Camera\PerspectiveCamera.h" />
     <ClInclude Include="Dependencies\include\glm\common.hpp" />
     <ClInclude Include="Dependencies\include\glm\detail\compute_common.hpp" />
     <ClInclude Include="Dependencies\include\glm\detail\compute_vector_relational.hpp" />
@@ -433,6 +440,8 @@
     <ClInclude Include="Dependencies\include\glm\vec3.hpp" />
     <ClInclude Include="Dependencies\include\glm\vec4.hpp" />
     <ClInclude Include="Dependencies\include\glm\vector_relational.hpp" />
+    <ClInclude Include="Model3D.h" />
+    <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tiny_obj_loader.h" />
   </ItemGroup>
@@ -587,8 +596,20 @@
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)Shaders</DestinationFolders>
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)Shaders</DestinationFolders>
     </CopyFileToFolders>
+    <None Include="Shaders\player.frag" />
+    <None Include="Shaders\player.vert" />
+    <None Include="Shaders\sample.frag" />
+    <None Include="Shaders\sample.vert" />
     <None Include="Shaders\skybox.frag" />
     <None Include="Shaders\skybox.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Skybox\rainbow_bk.png" />
+    <Image Include="Skybox\rainbow_dn.png" />
+    <Image Include="Skybox\rainbow_ft.png" />
+    <Image Include="Skybox\rainbow_lf.png" />
+    <Image Include="Skybox\rainbow_rt.png" />
+    <Image Include="Skybox\rainbow_up.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

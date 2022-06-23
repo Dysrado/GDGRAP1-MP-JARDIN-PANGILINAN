@@ -24,6 +24,18 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Model3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\MyCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\PerspectiveCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tiny_obj_loader.h">
@@ -878,6 +890,21 @@
     <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\MyCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\PerspectiveCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Dependencies\include\glm\detail\func_common.inl">
@@ -1290,9 +1317,33 @@
     </None>
     <None Include="Shaders\skybox.vert" />
     <None Include="Shaders\skybox.frag" />
+    <None Include="Shaders\player.frag" />
+    <None Include="Shaders\player.vert" />
+    <None Include="Shaders\sample.frag" />
+    <None Include="Shaders\sample.vert" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Shaders\shader.frag" />
     <CopyFileToFolders Include="Shaders\shader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Skybox\rainbow_bk.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Skybox\rainbow_dn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Skybox\rainbow_ft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Skybox\rainbow_lf.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Skybox\rainbow_rt.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Skybox\rainbow_up.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
