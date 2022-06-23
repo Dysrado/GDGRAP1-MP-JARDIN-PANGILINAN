@@ -54,8 +54,8 @@ int main(void)
     player->initialize();
 
     Model3D* debris1 = new Model3D(
-        "3D/Models/sus.obj",
-        "3D/Textures/texture.jpg",
+        "3D/Models/sphere.obj",
+        "3D/Textures/planet.jpg",
         "rgb",
         "Shaders/sample.vert",
         "Shaders/sample.frag",
@@ -79,7 +79,7 @@ int main(void)
 
     // the object transform
     player->initVariables(glm::vec3(0, 0, -1), glm::vec3(1, 1, 1), glm::vec3(0.2f));
-    debris1->initVariables(glm::vec3(0, 7, -30), glm::vec3(0, -45, 0), glm::vec3(0.05f));
+    debris1->initVariables(glm::vec3(0, 7, -30), glm::vec3(0, -45, 0), glm::vec3(0.5f));
 
     pCam->initialize(glm::vec3(0, 0, -1));
 

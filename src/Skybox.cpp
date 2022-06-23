@@ -83,12 +83,12 @@ void Skybox::bindBuffers()
     };
 
     std::string facesSkybox[]{ // fixed order
-        "Skybox/rainbow_rt.png",
-        "Skybox/rainbow_lf.png",
-        "Skybox/rainbow_up.png",
-        "Skybox/rainbow_dn.png",
-        "Skybox/rainbow_ft.png",
-        "Skybox/rainbow_bk.png",
+        "Skybox/skybox_right.png",
+        "Skybox/skybox_left.png",
+        "Skybox/skybox_up.png",
+        "Skybox/skybox_down.png",
+        "Skybox/skybox_front.png",
+        "Skybox/skybox_back.png",
     };
     //
     // Skybox shader
@@ -134,11 +134,11 @@ void Skybox::bindBuffers()
             glTexImage2D(
                 GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, // R,L,T,Bm,F,Bk
                 0,
-                GL_RGB,
+                GL_RGBA,
                 w,
                 h,
                 0,
-                GL_RGB,
+                GL_RGBA,
                 GL_UNSIGNED_BYTE,
                 data
             );
