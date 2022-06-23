@@ -1,0 +1,72 @@
+﻿  main.cpp
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(26,10): error C2039: 'vector': is not a member of 'std'
+D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\sstream(20): message : see declaration of 'std'
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(26,16): error C2065: 'vector': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(26,17): error C2653: 'tinyobj': is not a class or namespace name
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(26,26): error C2065: 'shape_t': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(26,35): error C2065: 'shapes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(27,10): error C2039: 'vector': is not a member of 'std'
+D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\sstream(20): message : see declaration of 'std'
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(27,16): error C2065: 'vector': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(27,17): error C2653: 'tinyobj': is not a class or namespace name
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(27,26): error C2065: 'material_t': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(27,38): error C2065: 'material': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(30,5): error C2653: 'tinyobj': is not a class or namespace name
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(30,14): error C2065: 'attrib_t': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(30,23): error C2146: syntax error: missing ';' before identifier 'attributes'
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(30,23): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(32,20): error C2653: 'tinyobj': is not a class or namespace name
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(32,38): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(33,10): error C2065: 'shapes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(33,19): error C2065: 'material': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(32,29): error C3861: 'LoadObj': identifier not found
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(36,10): error C2039: 'vector': is not a member of 'std'
+D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\sstream(20): message : see declaration of 'std'
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(36,16): error C2065: 'vector': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(36,17): error C2275: 'GLuint': illegal use of this type as an expression
+E:\School Files\6th Term\GDGRAP1\GL\GL\Dependencies\include\glad\glad.h(714): message : see declaration of 'GLuint'
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(36,25): error C2065: 'mesh_indices': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(37,25): error C2065: 'shapes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(38,9): error C2065: 'mesh_indices': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(38,32): error C2065: 'shapes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(42,10): error C2039: 'vector': is not a member of 'std'
+D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\sstream(20): message : see declaration of 'std'
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(42,16): error C2065: 'vector': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(42,17): error C2275: 'GLfloat': illegal use of this type as an expression
+E:\School Files\6th Term\GDGRAP1\GL\GL\Dependencies\include\glad\glad.h(717): message : see declaration of 'GLfloat'
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(42,26): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(43,25): error C2065: 'shapes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(44,9): error C2653: 'tinyobj': is not a class or namespace name
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(44,18): error C2065: 'index_t': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(44,26): error C2146: syntax error: missing ';' before identifier 'vData'
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(44,26): error C2065: 'vData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(44,34): error C2065: 'shapes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(46,26): error C2065: 'vData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(47,29): error C2065: 'vData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(48,25): error C2065: 'vData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(50,9): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(50,34): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(51,9): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(51,34): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(52,9): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(52,34): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(54,9): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(54,34): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(55,9): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(55,34): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(56,9): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(56,34): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(58,9): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(58,34): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(59,9): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(59,34): error C2065: 'attributes': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(101,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(101,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(165,53): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(165,76): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(165,114): error C2198: 'PFNGLBUFFERDATAPROC': too few arguments for call
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(243,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(252,26): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(304,39): error C2065: 'fullVertexData': undeclared identifier
+E:\School Files\Repos\GDGRAP1 MP\GDGRAP1-MP-JARDIN-PANGILINAN\GL\GL\main.cpp(304,64): error C2198: 'PFNGLDRAWARRAYSPROC': too few arguments for call
+  Model3D.cpp
