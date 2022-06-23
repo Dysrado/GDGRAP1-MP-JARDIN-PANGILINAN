@@ -8,10 +8,17 @@ public:
 
 	void initialize();
 	void initVariables(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
-	void update(GLFWwindow* window, float deltaTime);
+	virtual void update(GLFWwindow* window, float deltaTime, bool canMove);
 	void updateUniforms();
 	void render();
 	GLuint getShader();
+
+protected:
+	glm::mat4 identity = glm::mat4(1.f);
+	glm::mat4 entity;
+	glm::vec3 pos;
+	glm::vec3 rotation;
+	glm::vec3 scale;
 
 private:
 	std::string rgba;
@@ -34,10 +41,5 @@ private:
 	GLuint shaderProgram;
 	GLuint VAO, VBO;
 
-	glm::mat4 identity = glm::mat4(1.f);
-	glm::mat4 entity;
-	glm::vec3 pos;
-	glm::vec3 rotation;
-	glm::vec3 scale;
 };
 

@@ -323,39 +323,8 @@ void Model3D::initVariables(glm::vec3 position, glm::vec3 rotation, glm::vec3 sc
     entity = glm::rotate(entity, glm::radians(rotation.z), glm::vec3(0,0,1));
 }
 
-void Model3D::update(GLFWwindow* window, float deltaTime)
+void Model3D::update(GLFWwindow* window, float deltaTime, bool canMove)
 { 
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // Move Forward
-        pos.z -= 20 * deltaTime;
-        entity = glm::translate(identity, pos);
-        entity = glm::scale(entity, scale);
-    }
-    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) { // Move Forward
-        pos.z += 20 * deltaTime;
-        entity = glm::translate(identity, pos);
-        entity = glm::scale(entity, scale);
-    }
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // Move Right
-        pos.x += 20 * deltaTime;
-        entity = glm::translate(identity, pos);
-        entity = glm::scale(entity, scale);
-    }
-    else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // Move Left
-        pos.x -= 20 * deltaTime;
-        entity = glm::translate(identity, pos);
-        entity = glm::scale(entity, scale);
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) { // Move Up
-        pos.y += 20 * deltaTime;
-        entity = glm::translate(identity, pos);
-        entity = glm::scale(entity, scale);
-    }
-    else if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) { // Move Down
-        pos.y -= 20 * deltaTime;
-        entity = glm::translate(identity, pos);
-        entity = glm::scale(entity, scale);
-    }
 }
 
 void Model3D::updateUniforms()

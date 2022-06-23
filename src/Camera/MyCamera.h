@@ -12,7 +12,7 @@ class MyCamera
 {
 public:
 	virtual void initialize();
-	virtual void update(GLFWwindow* window, float deltaTime);
+	virtual void update(GLFWwindow* window, float deltaTime, glm::vec3 pos);
 	virtual void updateUniforms(GLuint shaderProgram);
 
 protected:

@@ -146,17 +146,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Camera\MyCamera.cpp" />
+    <ClCompile Include="Camera\OrthoCamera.cpp" />
     <ClCompile Include="Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="Dependencies\include\glm\detail\glm.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model3D.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Camera\MyCamera.h" />
+    <ClInclude Include="Camera\OrthoCamera.h" />
     <ClInclude Include="Camera\PerspectiveCamera.h" />
     <ClInclude Include="Dependencies\include\glm\common.hpp" />
     <ClInclude Include="Dependencies\include\glm\detail\compute_common.hpp" />
@@ -441,6 +446,7 @@
     <ClInclude Include="Dependencies\include\glm\vec4.hpp" />
     <ClInclude Include="Dependencies\include\glm\vector_relational.hpp" />
     <ClInclude Include="Model3D.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tiny_obj_loader.h" />

@@ -4,7 +4,7 @@ void MyCamera::initialize()
 {
 }
 
-void MyCamera::update(GLFWwindow* window, float deltaTime)
+void MyCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 pos)
 {
 }
 

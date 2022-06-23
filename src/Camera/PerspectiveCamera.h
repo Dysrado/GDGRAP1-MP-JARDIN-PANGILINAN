@@ -5,9 +5,10 @@ class PerspectiveCamera :
 {
 public:
     void initialize(glm::vec3 centerPos);
-    void update(GLFWwindow* window, float deltaTime);
+    void update(GLFWwindow* window, float deltaTime, glm::vec3 pos);
     void updateUniforms(GLuint shaderProgram);
 
+    // Getters
     glm::mat4 getView();
     glm::vec3 getF();
     glm::vec3 getR();
@@ -15,7 +16,6 @@ public:
     glm::mat4 getProj();
 
 private:
-    glm::vec3 angle;
     float distance;
     float MOVE_SPEED = 50.f;
     glm::vec3 centerPos;

@@ -25,7 +25,7 @@ void PerspectiveCamera::initialize(glm::vec3 centerPos)
     yaw = 90.f;
 
     // sets the clipping space of the camera
-    projection = glm::perspective(glm::radians(60.f), height / width, 0.01f, 800.f);
+    projection = glm::perspective(glm::radians(60.f), height / width, 0.01f, 500.f);
 
     // makes the F matrix dependent on the players/users mouse input
     glm::vec3 F = glm::vec3(0, 0, 0);
@@ -41,8 +41,9 @@ void PerspectiveCamera::initialize(glm::vec3 centerPos)
 }
 
 // moves the camera
-void PerspectiveCamera::update(GLFWwindow* window, float deltaTime)
+void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 pos)
 {
+    projection = glm::perspective(glm::radians(60.f), height / width, 0.01f, 500.f);
     F.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     F.y = sin(glm::radians(pitch));
     F.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -57,7 +58,6 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime)
     glfwGetCursorPos(window, &mousePosX, &mousePosY);
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-        
         // initializes the starting point when the player presses the left button
         if (firstMouse) {
             lastMousePosX = mousePosX;

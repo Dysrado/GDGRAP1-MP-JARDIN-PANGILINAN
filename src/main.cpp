@@ -12,9 +12,13 @@
 //
 //#include <string>
 //#include <iostream>
-#include "Camera/PerspectiveCamera.h"
+//#include "Camera/PerspectiveCamera.h"
+//#include "Camera/OrthoCamera.h"
+
+#include "Camera.h"
 #include "Skybox.h"
 #include "Model3D.h"
+#include "Player.h"
 
 
 int main(void)
@@ -43,7 +47,7 @@ int main(void)
     Skybox* skybox = new Skybox();
 
     // Parameters for the Model3D "obj path, texture path, rgba or rgb, .vert path, .frag path, isPlayer"
-    Model3D* player = new Model3D(
+    Player* player = new Player(
         "3D/Models/UFO.obj",
         "3D/Textures/ufo_diffuse.png",
         "rgba",
@@ -75,13 +79,13 @@ int main(void)
     float distance = 40.f;
     glm::mat4 identity = glm::mat4(1.f);
 
-    PerspectiveCamera* pCam = new PerspectiveCamera();
+    PerspectiveCamera* cam = new PerspectiveCamera();
 
     // the object transform
     player->initVariables(glm::vec3(0, 0, -1), glm::vec3(1, 1, 1), glm::vec3(0.2f));
     debris1->initVariables(glm::vec3(0, 7, -30), glm::vec3(0, -45, 0), glm::vec3(0.5f));
 
-    pCam->initialize(glm::vec3(0, 0, -1));
+    cam->initialize(glm::vec3(0, 0, -1));
 
     // light
     glm::vec3 lightPos = glm::vec3(-10, 10, 5);
@@ -108,11 +112,11 @@ int main(void)
         float deltaTime = currTime - lastTime;
 
         // Update Uniforms for the Skybox
-        skybox->updateUniforms(pCam->getView(), pCam->getProj());
+        skybox->updateUniforms(cam->getView(), cam->getProj());
 
         // Update Uniforms for the Player Object
         player->updateUniforms();
-        pCam->updateUniforms(player->getShader());
+        cam->updateUniforms(player->getShader());
 
         // Replace this when light is added ===============================================================
         // Lighting
@@ -139,7 +143,7 @@ int main(void)
 
         // for the debris
         debris1->updateUniforms();
-        pCam->updateUniforms(debris1->getShader());
+        cam->updateUniforms(debris1->getShader());
 
         // Replace this when light is added ===============================================================
         // Lighting
@@ -170,7 +174,9 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
 
-        pCam->update(window, deltaTime);
+        //cam->processInput(window);
+
+        cam->update(window, deltaTime, player->getPosition());
         //// Update Values for View Based on the Yaw and Pitch
         //F.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
         //F.y = sin(glm::radians(pitch));
@@ -181,8 +187,9 @@ int main(void)
         //U = glm::normalize(glm::cross(R, F));
 
         //view = glm::lookAt(cameraPos, cameraPos + F, WorldUp);
-
-        player->update(window, deltaTime);
+        player->setF(cam->getF());
+        player->setR(cam->getR());
+        player->update(window, deltaTime, true);
 
 
         lastTime = currTime;
