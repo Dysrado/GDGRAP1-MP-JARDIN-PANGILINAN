@@ -2,41 +2,56 @@
 #include <iostream>
 
 // initializes the camera
-void PerspectiveCamera::initialize(glm::vec3 centerPos)
+void PerspectiveCamera::initialize(glm::vec3 centerPos1)
 {
-    // Computation for the perspective and view matrix
-    projection = glm::perspective(glm::radians(60.f), height / width, 0.01f, 100.f);
-    distance = 40; // distance from the model to the camera
+ //   // Computation for the perspective and view matrix
+ //   projection = glm::perspective(glm::radians(60.f), height / width, 0.1f, 100.f);
+ //   distance = 40; // distance from the model to the camera
 
-    this->centerPos = centerPos; // offset if needed
-    cameraPos = glm::vec3(0.f, 0.f, distance);
-    WorldUp = glm::vec3(0, 1, 0);
+ //   this->centerPos = centerPos; // offset if needed
+ //   cameraPos = glm::vec3(0.f, 0.f, distance);
+ //   WorldUp = glm::vec3(0, 1, 0);
 
-    // variables used for mouse input
-    mousePosX = 0;
-    mousePosY = 0;
-    lastMousePosX = 0;
-    lastMousePosY = 0;
-    mouseOffsetX = 0;
-    mouseOffsetY = 0;
-    firstMouse = true;
+ //   // variables used for mouse input
+ //   mousePosX = 0;
+ //   mousePosY = 0;
+ //   lastMousePosX = 0;
+ //   lastMousePosY = 0;
+ //   mouseOffsetX = 0;
+ //   mouseOffsetY = 0;
+ //   firstMouse = true;
 
-    pitch = 0.f;
-    yaw = 90.f;
+ //   pitch = 0.f;
+ //   yaw = 90.f;
 
-    // sets the clipping space of the camera
-    projection = glm::perspective(glm::radians(60.f), height / width, 0.01f, 500.f);
+ //   // sets the clipping space of the camera
+ //   projection = glm::perspective(glm::radians(60.f), height / width, 0.01f, 500.f);
 
-    // makes the F matrix dependent on the players/users mouse input
-    glm::vec3 F = glm::vec3(0, 0, 0);
-    F.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    F.y = sin(glm::radians(pitch));
-    F.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+ //   // makes the F matrix dependent on the players/users mouse input
+ //   glm::vec3 F = glm::vec3(0, 0, 0);
+ ///*   F.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+ //   F.y = sin(glm::radians(pitch));
+ //   F.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));*/
+ //   F = glm::normalize(centerPos - cameraPos);
+ //   F = glm::normalize(F);
+ //   R = glm::normalize(glm::cross(F, WorldUp));
+ //   U = glm::normalize(glm::cross(R, F));
+ //   view = glm::lookAt(cameraPos, centerPos, WorldUp);
 
-    F = glm::normalize(F);
-    R = glm::normalize(glm::cross(F, WorldUp));
-    U = glm::normalize(glm::cross(R, F));
-    view = glm::lookAt(cameraPos, centerPos, WorldUp);
+    glm::mat4 identity(1.0f); //Identity Matrix
+    movement.x = 0;
+    movement.y = 0;
+    movement.z = 40.f;
+    projection = glm::perspective(glm::radians(60.0f), height / width, 0.1f, 100.f); //Projection Matrix
+    cameraPos = glm::vec3(0,0,-10); //Camera Position
+    WorldUp = glm::vec3(0.f, 1.f, 0.f); //World Up Coordinates
+    cameraPosMat = glm::translate(identity, cameraPos * -1.0f); //Camera Position Matrix
+    centerPos = glm::vec3(0.f, 3.f, 0.f); //Center Position Matrix
+    F = glm::normalize(centerPos - cameraPos); //Forward Vector
+    R = glm::normalize(glm::cross(F, WorldUp)); //Right Vector
+    U = glm::normalize(glm::cross(R, F)); //Up Vector
+    cameraOrientation = glm::mat4(glm::vec4(R, 0), glm::vec4(U, 0), glm::vec4((F * -1.0f), 0), glm::vec4(glm::vec3(0, 0, 0), 1)); //Camera Orientation Matrix
+    view = cameraOrientation * cameraPosMat; //View Matrix 
 
 }
 
