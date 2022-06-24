@@ -149,40 +149,9 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
         norm_bytes = stbi_load("3D/Textures/ufo_normal.png", &img_width2, &img_height2, &colorChannels2, 0);
     }
 
-    // vertex shader
-    std::fstream verStream(vert);
-    std::stringstream vertStrStream;
+    shader = new Shader(vert, frag);
 
-    vertStrStream << verStream.rdbuf();
-    std::string vertStr = vertStrStream.str();
-
-    const char* vertSrc = vertStr.c_str();
-
-    // fragment shader
-    std::fstream fragStream(frag);
-    std::stringstream fragStrStream;
-
-    fragStrStream << fragStream.rdbuf();
-    std::string fragStr = fragStrStream.str();
-
-    const char* fragSrc = fragStr.c_str();
-
-    // vertex Shader
-    GLuint vertShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertShader, 1, &vertSrc, NULL);
-    glCompileShader(vertShader);
-
-    // fragment Shader
-    GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragShader, 1, &fragSrc, NULL);
-    glCompileShader(fragShader);
-
-    // shader program
-    shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertShader);
-    glAttachShader(shaderProgram, fragShader);
-
-    glLinkProgram(shaderProgram);
+    shaderProgram = shader->getShader();
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);

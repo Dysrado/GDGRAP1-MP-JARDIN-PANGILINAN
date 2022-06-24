@@ -156,6 +156,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -449,6 +450,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="Model3D.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tiny_obj_loader.h" />

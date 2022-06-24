@@ -1,6 +1,7 @@
 #pragma once
 #include "Base.h"
 #include "Light.h"
+#include "Shader.h"
 class Model3D
 {
 public:
@@ -39,6 +40,8 @@ private:
 
 	GLuint norm_tex;
 	unsigned char* norm_bytes;
+
+	Shader* shader;
 
 	GLuint shaderProgram;
 	GLuint VAO, VBO;

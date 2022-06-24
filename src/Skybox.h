@@ -1,6 +1,6 @@
 #pragma once
 #include "Base.h"
-
+#include "Shader.h"
 
 class Skybox
 {
@@ -12,6 +12,7 @@ public:
 
 private:
 	GLuint skyboxShader;
+	Shader* shader;
 	unsigned int skyboxVAO, skyboxVBO, skyboxEBO;
 	unsigned int skyboxTex;
 

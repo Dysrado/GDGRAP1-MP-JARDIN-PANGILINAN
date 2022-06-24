@@ -2,40 +2,8 @@
 
 void Skybox::initialize(std::string vert, std::string frag)
 {
-    // vertex shader
-    std::fstream skyboxVertexSrc(vert);//"Shader/skybox.vert"
-    std::stringstream skyboxVertexBuff;
-
-    skyboxVertexBuff << skyboxVertexSrc.rdbuf();
-    std::string skyboxVertexS = skyboxVertexBuff.str();
-
-    const char* sky_v = skyboxVertexS.c_str();
-
-    // fragment shader
-    std::fstream skyboxFragSrc(frag);//"Shader/skybox.frag"
-    std::stringstream skyboxFragBuff;
-
-    skyboxFragBuff << skyboxFragSrc.rdbuf();
-    std::string skyboxFragS = skyboxFragBuff.str();
-
-    const char* sky_f = skyboxFragS.c_str();
-
-    GLuint skyboxVertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(skyboxVertexShader, 1, &sky_v, NULL);
-    glCompileShader(skyboxVertexShader);
-
-    GLuint skyboxFragShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(skyboxFragShader, 1, &sky_f, NULL);
-    glCompileShader(skyboxFragShader);
-
-    skyboxShader = glCreateProgram();
-    glAttachShader(skyboxShader, skyboxVertexShader);
-    glAttachShader(skyboxShader, skyboxFragShader);
-
-    glLinkProgram(skyboxShader);
-    glDeleteShader(skyboxVertexShader);
-    glDeleteShader(skyboxFragShader);
-
+    shader = new Shader(vert, frag);
+    skyboxShader = shader->getShader();
 }
 
 void Skybox::bindBuffers()
