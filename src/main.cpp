@@ -100,9 +100,9 @@ int main(void)
     OrthoCamera* oCam = new OrthoCamera();
 
     // the object transform
-    player->initVariables(glm::vec3(0, 0, -1), glm::vec3(1, 1, 1), glm::vec3(0.2f));
+    player->initVariables(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), glm::vec3(0.2f));
     //planet->initVariables(glm::vec3(0, 7, -100), glm::vec3(0, 0, 0), glm::vec3(5.f));
-    debris1->initVariables(glm::vec3(0, 7, -20), glm::vec3(0, -45, 0), glm::vec3(0.1f));
+    debris1->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
 
     // Initialize the values needed for the camera
     pCam->initialize(glm::vec3(0, 0, -1));
