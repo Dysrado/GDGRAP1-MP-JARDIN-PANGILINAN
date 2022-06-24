@@ -122,7 +122,17 @@ int main(void)
         /* Current Time */
         GLfloat currTime = glfwGetTime();
         float cooldownTimer = glfwGetTime(); // Used for the cooldown for swaping cameras
-
+        if (cooldownTimer > lastCDTime + 0.5f) {
+            if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+                lastCDTime = glfwGetTime();
+                if (inPers) {
+                    inPers = false;
+                }
+                else {
+                    inPers = true;
+                }
+            }
+        }
         /* Time that has passed */
         float deltaTime = currTime - lastTime;
 
