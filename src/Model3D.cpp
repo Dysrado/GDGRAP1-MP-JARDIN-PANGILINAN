@@ -3,7 +3,6 @@
 
 Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer, int lit) 
 {
-   
     this->lit = lit;
     this->isPlayer = isPlayer;
     this->rgba = rgba;
@@ -23,7 +22,7 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
         mesh_indices.push_back(shapes[0].mesh.indices[i].vertex_index);
     }
 
-    if (this->isPlayer == true) {
+    if (this->isPlayer == true) {// If it's the player then add the normals
         // Computation for the tangents
         for (int i = 0; i < shapes[0].mesh.indices.size(); i += 3) {
             tinyobj::index_t vData1 = shapes[0].mesh.indices[i];
@@ -142,15 +141,15 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
     // loads the texture into the .obj
     stbi_set_flip_vertically_on_load(true);
     tex_bytes = stbi_load(texPath.c_str(), &img_width, &img_height, &colorChannels, 0);
-    //std::cout << "Texture Path: "  << texPath.c_str() << std::endl;
 
-    if (this->isPlayer == true) {
+    if (this->isPlayer == true) { // If it's the player then add the normals
+        // loads the normals into the .obj
         stbi_set_flip_vertically_on_load(true);
         norm_bytes = stbi_load("3D/Textures/ufo_normal.png", &img_width2, &img_height2, &colorChannels2, 0);
     }
 
+    // Adds the shader
     shader = new Shader(vert, frag);
-
     shaderProgram = shader->getShader();
 
     glGenVertexArrays(1, &VAO);
@@ -163,7 +162,8 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
     // Data for the Vertices, Normals, and UVs
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * fullVertexData.size(), fullVertexData.data(), GL_DYNAMIC_DRAW);
     //light = new Light(this->getShader());
-    if (this->isPlayer == true) {
+
+    if (this->isPlayer == true) { // If it's the player then add the normals
         GLintptr normPtr = 3 * sizeof(GLfloat);
         GLintptr uvPtr = 6 * sizeof(GLfloat);
 
@@ -201,6 +201,7 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
         glEnableVertexAttribArray(0);
     }
 
+    // Bind buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -225,7 +226,7 @@ void Model3D::initialize()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
-    if (rgba == "RGBA" || rgba == "rgba") {
+    if (rgba == "RGBA" || rgba == "rgba") { // For Convenience in changing the image channel
         glTexImage2D(
             GL_TEXTURE_2D,
             0,
@@ -256,7 +257,7 @@ void Model3D::initialize()
     glGenerateMipmap(GL_TEXTURE_2D);
     stbi_image_free(tex_bytes);
 
-    if (this->isPlayer == true) {
+    if (this->isPlayer == true) { // If it's the player then add the normals
         // Normal Map
         glGenTextures(1, &norm_tex);
         glActiveTexture(GL_TEXTURE1);
@@ -287,6 +288,7 @@ void Model3D::initialize()
 
 void Model3D::initVariables(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
+    // Initializes values for the model
     entity = identity;
     this->pos = position;
     entity = glm::translate(identity, pos);
@@ -304,9 +306,9 @@ void Model3D::update(GLFWwindow* window, float deltaTime, bool canMove)
 
 void Model3D::updateUniforms()
 {
+    // Updates the uniforms using the shader
     glUseProgram(shaderProgram);
 
-    // Uniforms
     unsigned int translationLoc = glGetUniformLocation(shaderProgram, "transform");
     glUniformMatrix4fv(translationLoc, 1, GL_FALSE, glm::value_ptr(entity));
 
@@ -315,7 +317,7 @@ void Model3D::updateUniforms()
     glUniform1i(tex0Loc, 0);
     glBindTexture(GL_TEXTURE_2D, texture);
 
-    if (this->isPlayer == true) {
+    if (this->isPlayer == true) { // If it's the player then include the normals
         glActiveTexture(GL_TEXTURE1);
         GLuint norm_texLoc = glGetUniformLocation(shaderProgram, "norm_tex");
         glBindTexture(GL_TEXTURE_2D, norm_tex);

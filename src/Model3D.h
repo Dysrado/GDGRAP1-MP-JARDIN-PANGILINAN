@@ -26,6 +26,7 @@ private:
 	//Light* lightObj;
 	std::string rgba;
 	bool isPlayer;
+
 	int img_width, img_height, colorChannels;
 	int img_width2, img_height2, colorChannels2;
 
@@ -35,6 +36,7 @@ private:
 	std::vector<glm::vec3> tangents;
 	std::vector<glm::vec3> biTangents;
 
+	// Textures
 	GLuint texture;
 	unsigned char* tex_bytes;
 
