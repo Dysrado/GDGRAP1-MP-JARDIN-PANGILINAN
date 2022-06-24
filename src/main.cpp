@@ -20,6 +20,7 @@
 #include "Skybox.h"
 #include "Model3D.h"
 #include "Player.h"
+#include "Light.h"
 
 
 int main(void)
@@ -47,7 +48,7 @@ int main(void)
 
     // Create Skybox
     Skybox* skybox = new Skybox();
-
+    Light* lightManager = new Light();
     // Create Player
     // Parameters for the Model3D "obj path, texture path, rgba or rgb, .vert path, .frag path, isPlayer"
     Player* player = new Player(
@@ -56,18 +57,28 @@ int main(void)
         "rgba",
         "Shaders/player.vert",
         "Shaders/player.frag",
-        true
+        true, 1
     );// Model Source: https://www.turbosquid.com/3d-models/free-3ds-model-flying-saucer/1081073#
     player->initialize();
 
-    // Create 1st Debris
-    Model3D* debris1 = new Model3D(
+    /*Model3D* planet = new Model3D(
         "3D/Models/sphere.obj",
         "3D/Textures/planet.jpg",
         "rgb",
         "Shaders/sample.vert",
         "Shaders/sample.frag",
-        false
+        false, 0
+    );
+    planet->initialize();*/
+
+    // Create 1st Debris
+    Model3D* debris1 = new Model3D(
+        "3D/Models/sus.obj",
+        "3D/Textures/texture.jpg",
+        "rgb",
+        "Shaders/sample.vert",
+        "Shaders/sample.frag",
+        false, 1
     );
     debris1->initialize();
 
@@ -90,21 +101,14 @@ int main(void)
 
     // the object transform
     player->initVariables(glm::vec3(0, 0, -1), glm::vec3(1, 1, 1), glm::vec3(0.2f));
-    debris1->initVariables(glm::vec3(0, 7, -30), glm::vec3(0, -45, 0), glm::vec3(0.5f));
+    //planet->initVariables(glm::vec3(0, 7, -100), glm::vec3(0, 0, 0), glm::vec3(5.f));
+    debris1->initVariables(glm::vec3(0, 7, -20), glm::vec3(0, -45, 0), glm::vec3(0.1f));
 
     // Initialize the values needed for the camera
     pCam->initialize(glm::vec3(0, 0, -1));
     oCam->initialize(glm::vec3(0, 0, -1));
 
-    // light
-    glm::vec3 lightPos = glm::vec3(-10, 10, 5);
-    glm::vec3 lightColor = glm::vec3(1.f, 1.f, 1.f);
-
-    float ambientStr = 0.1f;
-    glm::vec3 ambientColor = lightColor;
-
-    float specStr = 0.5f;
-    float specPhong = 16.f;
+  
 
     float lastTime = glfwGetTime();
     float lastCDTime = glfwGetTime(); // Last time the camera was swaped
@@ -134,31 +138,16 @@ int main(void)
             oCam->updateUniforms(player->getShader());
         }
 
-        // Replace this when light is added ===============================================================
-        // Lighting
-        GLuint lightPosAddress = glGetUniformLocation(player->getShader(), "lightPos");
-        glUniform3fv(lightPosAddress, 1, glm::value_ptr(lightPos));
-
-        GLuint lightColorAddress = glGetUniformLocation(player->getShader(), "lightColor");
-        glUniform3fv(lightColorAddress, 1, glm::value_ptr(lightColor));
-
-        GLuint ambientColorAddress = glGetUniformLocation(player->getShader(), "ambientColor");
-        glUniform3fv(ambientColorAddress, 1, glm::value_ptr(ambientColor));
-
-        GLuint ambientStrAddress = glGetUniformLocation(player->getShader(), "ambientStr");
-        glUniform1f(ambientStrAddress, ambientStr);
-
-        GLuint specStrAddress = glGetUniformLocation(player->getShader(), "specStr");
-        glUniform1f(specStrAddress, specStr);
-
-        GLuint specPhongAddress = glGetUniformLocation(player->getShader(), "specPhong");
-        glUniform1f(specPhongAddress, specPhong);
-
+       
+        
+        lightManager->update(player->getShader(), window, player->getF());
+       
         // Draw Player
         player->render();
 
         // for the debris
         debris1->updateUniforms();
+        
         if (inPers) {
             pCam->updateUniforms(debris1->getShader());
         }
@@ -166,28 +155,19 @@ int main(void)
             oCam->updateUniforms(debris1->getShader());
         }
 
-        // Replace this when light is added ===============================================================
-        // Lighting
-        GLuint lightPosAddress2 = glGetUniformLocation(debris1->getShader(), "lightPos");
-        glUniform3fv(lightPosAddress2, 1, glm::value_ptr(lightPos));
-
-        GLuint lightColorAddress2 = glGetUniformLocation(debris1->getShader(), "lightColor");
-        glUniform3fv(lightColorAddress2, 1, glm::value_ptr(lightColor));
-
-        GLuint ambientColorAddress2 = glGetUniformLocation(debris1->getShader(), "ambientColor");
-        glUniform3fv(ambientColorAddress2, 1, glm::value_ptr(ambientColor));
-
-        GLuint ambientStrAddress2 = glGetUniformLocation(debris1->getShader(), "ambientStr");
-        glUniform1f(ambientStrAddress2, ambientStr);
-
-        GLuint specStrAddress2 = glGetUniformLocation(debris1->getShader(), "specStr");
-        glUniform1f(specStrAddress2, specStr);
-
-        GLuint specPhongAddress2 = glGetUniformLocation(debris1->getShader(), "specPhong");
-        glUniform1f(specPhongAddress2, specPhong);
-
         // Draw debris1
+        lightManager->update(debris1->getShader(), window, player->getF());
         debris1->render();
+
+        //planet->updateUniforms();
+        //if (inPers) {
+        //    pCam->updateUniforms(planet->getShader());
+        //}
+        //else {
+        //    oCam->updateUniforms(planet->getShader());
+        //}
+        ////lightManager->update(planet->getShader());
+        //planet->render();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
@@ -196,17 +176,17 @@ int main(void)
         glfwPollEvents();
 
         //cam->processInput(window);
-        if (cooldownTimer > lastCDTime + 0.5f) { // in 0.5 seconds you can change cameras
-            if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-                lastCDTime = glfwGetTime(); // Resets the timer
-                if (inPers) {
-                    inPers = false;
-                }
-                else {
-                    inPers = true;
-                }
-            }
-        }
+        //if (cooldownTimer > lastCDTime + 0.5f) { // in 0.5 seconds you can change cameras
+        //    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+        //        lastCDTime = glfwGetTime(); // Resets the timer
+        //        if (inPers) {
+        //            inPers = false;
+        //        }
+        //        else {
+        //            inPers = true;
+        //        }
+        //    }
+        //}
 
         if (inPers) { // Allows movement during perspective mode
             pCam->update(window, deltaTime, player->getPosition());
@@ -222,6 +202,7 @@ int main(void)
     }
 
     delete player;
+   // delete planet;
     delete debris1;
     delete pCam;
     delete oCam;

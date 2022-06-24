@@ -4,6 +4,9 @@ uniform sampler2D norm_tex;
 
 uniform vec3 lightPos;
 uniform vec3 lightColor;
+uniform vec3 lightDirection;
+
+uniform int lightType;
 
 uniform float ambientStr;
 uniform vec3 ambientColor;
@@ -22,6 +25,7 @@ out vec4 FragColor; //Returns a Color
 //Simple shader that colors the model Red
 void main()
 {
+    vec3 lightDir;
     vec4 pixelColor = texture(tex0, texCoord);
 
     if(pixelColor.a < 0.1){
@@ -36,7 +40,12 @@ void main()
 
     
     // computation for lighting
-    vec3 lightDir = normalize(lightPos - fragPos);
+    if (lightType == 0){
+        lightDir = normalize(lightPos - fragPos);
+    }
+    else if(lightType == 1){
+        lightDir = normalize(-lightDirection);
+    }
 
     float diff = max(dot(normal, lightDir), 0.0);
     vec3 diffuse = diff * lightColor;
@@ -48,7 +57,18 @@ void main()
 
     float spec = pow(max(dot(reflectDir, viewDir), 0.1), specPhong);
     vec3 specColor = spec * specStr * lightColor;
-
+    
+    if(lightType == 0){
+     /*Attenuation*/ 
+    float distance = length(lightPos - fragPos); //Distance from the Light and Object
+    float intensity = 1.0f/(distance * distance); // Formula of intensity given
+    
+    /*Incorporating the intensity to the light*/
+    specColor *= intensity;
+    ambientCol *= intensity;
+    diffuse *= intensity;
+    }
+   
     // Computation for the additional texture
-    FragColor = (vec4(specColor + ambientCol + diffuse, .6) * pixelColor);
+    FragColor = (vec4(specColor + ambientCol + diffuse, 1.0) * pixelColor);
 }

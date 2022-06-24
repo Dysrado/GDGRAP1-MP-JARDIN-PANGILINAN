@@ -45,6 +45,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tiny_obj_loader.h">
@@ -923,6 +926,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Dependencies\include\glm\detail\func_common.inl">
@@ -1339,10 +1345,7 @@
     <None Include="Shaders\player.vert" />
     <None Include="Shaders\sample.frag" />
     <None Include="Shaders\sample.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <CopyFileToFolders Include="Shaders\shader.frag" />
-    <CopyFileToFolders Include="Shaders\shader.vert" />
+    <None Include="Shaders\planet.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Skybox\rainbow_bk.png">
@@ -1363,5 +1366,8 @@
     <Image Include="Skybox\rainbow_up.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\planet.frag" />
   </ItemGroup>
 </Project>

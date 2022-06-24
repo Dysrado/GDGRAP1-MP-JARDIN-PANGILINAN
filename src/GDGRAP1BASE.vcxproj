@@ -152,6 +152,7 @@
     <ClCompile Include="Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="Dependencies\include\glm\detail\glm.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -445,6 +446,7 @@
     <ClInclude Include="Dependencies\include\glm\vec3.hpp" />
     <ClInclude Include="Dependencies\include\glm\vec4.hpp" />
     <ClInclude Include="Dependencies\include\glm\vector_relational.hpp" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Model3D.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Skybox.h" />
@@ -588,20 +590,7 @@
     <None Include="Dependencies\include\glm\gtx\vector_angle.inl" />
     <None Include="Dependencies\include\glm\gtx\vector_query.inl" />
     <None Include="Dependencies\include\glm\gtx\wrap.inl" />
-    <CopyFileToFolders Include="Shaders\shader.frag">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
-      <FileType>Document</FileType>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)Shaders</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)Shaders</DestinationFolders>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="Shaders\shader.vert">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
-      <FileType>Document</FileType>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)Shaders</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)Shaders</DestinationFolders>
-    </CopyFileToFolders>
+    <None Include="Shaders\planet.vert" />
     <None Include="Shaders\player.frag" />
     <None Include="Shaders\player.vert" />
     <None Include="Shaders\sample.frag" />
@@ -616,6 +605,9 @@
     <Image Include="Skybox\rainbow_lf.png" />
     <Image Include="Skybox\rainbow_rt.png" />
     <Image Include="Skybox\rainbow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\planet.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

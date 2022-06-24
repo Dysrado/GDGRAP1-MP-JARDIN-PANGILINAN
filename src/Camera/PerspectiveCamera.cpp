@@ -51,6 +51,9 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
     F = glm::normalize(F);
     R = glm::normalize(glm::cross(F, WorldUp));
     U = glm::normalize(glm::cross(R, F));
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        cameraPos -= 20.f * F * deltaTime;
+    }
 
     view = glm::lookAt(cameraPos, F, WorldUp);
 

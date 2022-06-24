@@ -1,7 +1,10 @@
 #include "Model3D.h"
 
-Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer)
+
+Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer, int lit) 
 {
+   
+    this->lit = lit;
     this->isPlayer = isPlayer;
     this->rgba = rgba;
     //std::cout << "Obj Path: " << path.c_str() << std::endl;
@@ -190,7 +193,7 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
 
     // Data for the Vertices, Normals, and UVs
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * fullVertexData.size(), fullVertexData.data(), GL_DYNAMIC_DRAW);
-
+    //light = new Light(this->getShader());
     if (this->isPlayer == true) {
         GLintptr normPtr = 3 * sizeof(GLfloat);
         GLintptr uvPtr = 6 * sizeof(GLfloat);
@@ -232,6 +235,9 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+   
 }
 
 Model3D::~Model3D()
@@ -346,7 +352,11 @@ void Model3D::updateUniforms()
         glBindTexture(GL_TEXTURE_2D, norm_tex);
         glUniform1i(norm_texLoc, 1);
     }
-    
+    if (this->isPlayer != true) {
+    GLuint decisionAddress = glGetUniformLocation(shaderProgram, "lit");
+    glUniform1i(decisionAddress, this->lit);
+
+    }
 }
 
 

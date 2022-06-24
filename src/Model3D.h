@@ -1,9 +1,10 @@
 #pragma once
 #include "Base.h"
+#include "Light.h"
 class Model3D
 {
 public:
-	Model3D(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer);
+	Model3D(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer, int lit);
 	~Model3D();
 
 	void initialize();
@@ -21,6 +22,7 @@ protected:
 	glm::vec3 scale;
 
 private:
+	//Light* lightObj;
 	std::string rgba;
 	bool isPlayer;
 	int img_width, img_height, colorChannels;
@@ -40,6 +42,8 @@ private:
 
 	GLuint shaderProgram;
 	GLuint VAO, VBO;
+
+	int lit;
 
 };
 

@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <cmath>
 
-Player::Player(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer) : Model3D(path, texPath, rgba, vert, frag, isPlayer)
+Player::Player(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer, int lit) : Model3D(path, texPath, rgba, vert, frag, isPlayer, lit)
 {
 }
 
@@ -64,4 +64,10 @@ void Player::update(GLFWwindow* window, float deltaTime, bool canMove)
         entity = glm::translate(identity, pos);
         entity = glm::scale(entity, scale);
     }
+  
+}
+
+glm::vec3 Player::getF()
+{
+    return F;
 }

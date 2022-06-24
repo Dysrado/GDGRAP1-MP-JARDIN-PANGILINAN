@@ -3,7 +3,7 @@
 class Player : public Model3D
 {
 public:
-	Player(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer);
+	Player(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer, int lit);
 	~Player();
 
 	// Getter and Setters
@@ -12,7 +12,7 @@ public:
 	void setR(glm::vec3 value);
 
 	void update(GLFWwindow* window, float deltaTime, bool canMove);
-
+	glm::vec3 getF();
 
 private:
 	const float SPEED = 20.f;
