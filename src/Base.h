@@ -1,4 +1,5 @@
 #pragma once
+// Calls header file for the Skybox and Model3D classes
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 

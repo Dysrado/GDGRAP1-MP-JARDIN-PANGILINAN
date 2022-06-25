@@ -8,25 +8,17 @@ void Skybox::initialize(std::string vert, std::string frag)
 
 void Skybox::bindBuffers()
 {
-    /*
-      7--------6
-     /|       /|
-    4--------5 |
-    | |      | |
-    | 3------|-2
-    |/       |/
-    0--------1
-*/
+
 //Vertices for the cube
     float skyboxVertices[]{
-        -200.f, -200.f, 200.f, //0
-        200.f, -200.f, 200.f,  //1
-        200.f, -200.f, -200.f, //2
-        -200.f, -200.f, -200.f,//3
-        -200.f, 200.f, 200.f,  //4
-        200.f, 200.f, 200.f,   //5
-        200.f, 200.f, -200.f,  //6
-        -200.f, 200.f, -200.f  //7
+        -200.f, -200.f, 200.f, 
+        200.f, -200.f, 200.f,  
+        200.f, -200.f, -200.f, 
+        -200.f, -200.f, -200.f,
+        -200.f, 200.f, 200.f,  
+        200.f, 200.f, 200.f,   
+        200.f, 200.f, -200.f,  
+        -200.f, 200.f, -200.f  
     };
 
     //Skybox Indices
@@ -58,12 +50,6 @@ void Skybox::bindBuffers()
         "Skybox/skybox_front.png",
         "Skybox/skybox_back.png"
 
-        //"Skybox/galaxy_rt.png",
-        //"Skybox/galaxy_lf.png",
-        //"Skybox/galaxy_up.png",
-        //"Skybox/galaxy_dn.png",
-        //"Skybox/galaxy_ft.png",
-        //"Skybox/galaxy_bk.png"
     };
     
     // Skybox shader

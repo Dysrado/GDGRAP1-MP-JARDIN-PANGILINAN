@@ -3,10 +3,11 @@
 
 Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::string vert, std::string frag, bool isPlayer, int lit) 
 {
+    // Sets values for determining if its a player, unlit obj, and what color channel does it have
     this->lit = lit;
     this->isPlayer = isPlayer;
     this->rgba = rgba;
-    //std::cout << "Obj Path: " << path.c_str() << std::endl;
+    
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> material;
     std::string warning, error;
@@ -159,7 +160,7 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
 
     // Data for the Vertices, Normals, and UVs
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * fullVertexData.size(), fullVertexData.data(), GL_DYNAMIC_DRAW);
-    //light = new Light(this->getShader());
+
 
     if (this->isPlayer == true) { // If it's the player then add the normals
         GLintptr normPtr = 3 * sizeof(GLfloat);

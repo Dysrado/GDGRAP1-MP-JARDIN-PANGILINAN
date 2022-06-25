@@ -32,7 +32,8 @@ private:
     glm::vec3 movement;
     glm::mat4 cameraOrientation;
     glm::mat4 cameraPosMat;
-   // glm::mat4 cameraOrientation;
+
+    // Used for Mouse Input
     bool mouse = false;
     double xpos = 0.f, /*Current x Position of Mouse*/
         lastx = 800 / 2.0f,
@@ -40,11 +41,11 @@ private:
         ypos = 0.f,
         lasty = 800 / 2.0f,
         yoffset = 0.f;
+
     GLfloat sens = 10.f;
     float distance;
     float MOVE_SPEED = 50.f;
     glm::vec3 centerPos;
-    glm::vec3 additional;
 
     glm::vec3 WorldUp = glm::vec3(0, 1, 0);
 

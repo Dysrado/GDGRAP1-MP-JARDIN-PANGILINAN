@@ -33,7 +33,7 @@ void Player::setR(glm::vec3 value)
 
 void Player::update(GLFWwindow* window, float deltaTime, bool canMove)
 {
-    // Based on the F and R move the obj accordingly
+    // Moves the position depending on its orientation
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // Move Forward
         pos.x += SPEED * deltaTime * sin(glm::radians(turn));
         pos.z += SPEED * deltaTime * cos(glm::radians(turn));
@@ -42,15 +42,12 @@ void Player::update(GLFWwindow* window, float deltaTime, bool canMove)
         pos.x -= SPEED * deltaTime * sin(glm::radians(turn));
         pos.z -= SPEED * deltaTime * cos(glm::radians(turn));
     }
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // Move Right
+
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // Turn Right
         turn -= deltaTime * SPEED;
-        /*pos.x += R.x * SPEED * deltaTime;
-        pos.z += R.z * SPEED * deltaTime;*/
     }
-    else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // Move Left
+    else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // Turn Left
         turn += deltaTime * SPEED;
-        /*pos.x -= R.x * SPEED * deltaTime;
-        pos.z -= R.z * SPEED * deltaTime;*/
     }
 
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) { // Move Up
@@ -69,7 +66,7 @@ void Player::update(GLFWwindow* window, float deltaTime, bool canMove)
 glm::vec3 Player::getFront(glm::vec3 cameraPos)
 {
     glm::vec3 temp(0.f);
-    temp.x -= SPEED  * cos(glm::radians(turn));
-    temp.z -= SPEED  * sin(glm::radians(turn));
+    temp.x -= SPEED  * sin(glm::radians(turn));
+    temp.z -= SPEED  * cos(glm::radians(turn));
     return  pos - temp;
 }

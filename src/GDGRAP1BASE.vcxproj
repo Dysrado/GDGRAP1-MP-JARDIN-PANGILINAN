@@ -595,14 +595,6 @@
     <None Include="Shaders\skybox.frag" />
     <None Include="Shaders\skybox.vert" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Skybox\rainbow_bk.png" />
-    <Image Include="Skybox\rainbow_dn.png" />
-    <Image Include="Skybox\rainbow_ft.png" />
-    <Image Include="Skybox\rainbow_lf.png" />
-    <Image Include="Skybox\rainbow_rt.png" />
-    <Image Include="Skybox\rainbow_up.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
