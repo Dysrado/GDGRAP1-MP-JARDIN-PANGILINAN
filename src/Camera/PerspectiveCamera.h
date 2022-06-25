@@ -40,7 +40,7 @@ private:
         ypos = 0.f,
         lasty = 800 / 2.0f,
         yoffset = 0.f;
-    GLfloat sens = 7.f;
+    GLfloat sens = 10.f;
     float distance;
     float MOVE_SPEED = 50.f;
     glm::vec3 centerPos;

@@ -122,6 +122,13 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
     R = glm::normalize(glm::cross(F, WorldUp));
     U = glm::normalize(glm::cross(R, F));
     view = glm::lookAt(cameraPos, cameraPos + F, WorldUp);
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+       cameraPos.x += 20.f * F.x * deltaTime;
+       cameraPos.z += 20.f * F.z * deltaTime;
+       //cameraPos -= 20.f * F * deltaTime;
+    }
+
     /*if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {*/
         glfwGetCursorPos(window, &xpos, &ypos);
         if (mouse == true) {
@@ -143,9 +150,9 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
             pitch = 89.0f;
         if (pitch < -89.0f)
             pitch = -89.0f;
-    }
+//    }
 
-//}
+}
 
 // updates the uniforms depending the given data (projection, view, cameraPos)
 void PerspectiveCamera::updateUniforms(GLuint shaderProgram)

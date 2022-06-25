@@ -108,7 +108,8 @@ int main(void)
     pCam->initialize(glm::vec3(0, 0, -1));
     oCam->initialize(glm::vec3(0, 0, -1));
 
-  
+    // Disables the Cursor
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     float lastTime = glfwGetTime();
     float lastCDTime = glfwGetTime(); // Last time the camera was swaped
