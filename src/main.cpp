@@ -51,9 +51,9 @@ int main(void)
     // Create Player
     // Parameters for the Model3D "obj path, texture path, rgba or rgb, .vert path, .frag path, isPlayer"
     Player* player = new Player(
-        "3D/Models/UFO.obj",
-        "3D/Textures/ufo_diffuse.png",
-        "rgba",
+        "3D/Models/ship.obj",
+        "3D/Textures/ship_diffuse.jpg",
+        "rgb",
         "Shaders/player.vert",
         "Shaders/player.frag",
         true, 1
@@ -101,7 +101,7 @@ int main(void)
     OrthoCamera* oCam = new OrthoCamera();
 
     // the object transform
-    player->initVariables(glm::vec3(0, 0, 0), glm::vec3(1, -90, 1), glm::vec3(0.2f));
+    player->initVariables(glm::vec3(0, 0, 0), glm::vec3(1, -90, 1), glm::vec3(0.005f));
     planet->initVariables(glm::vec3(0, 7, 100), glm::vec3(0, 0, 0), glm::vec3(5.f));
     debris1->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
 

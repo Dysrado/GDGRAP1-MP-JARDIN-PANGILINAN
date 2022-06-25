@@ -143,7 +143,7 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
     if (this->isPlayer == true) { // If it's the player then add the normals
         // loads the normals into the .obj
         stbi_set_flip_vertically_on_load(true);
-        norm_bytes = stbi_load("3D/Textures/ufo_normal.png", &img_width2, &img_height2, &colorChannels2, 0);
+        norm_bytes = stbi_load("3D/Textures/ship_normal.jpg", &img_width2, &img_height2, &colorChannels2, 0);
     }
 
     // Adds the shader

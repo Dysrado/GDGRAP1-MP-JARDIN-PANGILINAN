@@ -70,6 +70,7 @@ glm::vec3 Player::getFront(glm::vec3 cameraPos)
 {
     glm::vec3 temp(0.f);
     temp.x-= SPEED  * sin(glm::radians(turn));
+    temp.y = 7.f;
     temp.z -= SPEED  * cos(glm::radians(turn));
     return  pos - temp;
 }
