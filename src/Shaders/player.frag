@@ -61,8 +61,10 @@ void main()
     if(lightType == 0){
      /*Attenuation*/ 
     float distance = length(lightPos - fragPos); //Distance from the Light and Object
-    float intensity = 1.0f/(distance * distance); // Formula of intensity given
-    
+//    float intensity = 1.0f + 
+//        0.09f * distance +
+//        0.032f * distance * distance; // Formula of intensity given
+    float intensity = clamp(10.0 / distance, 0.0, 1.0);
     /*Incorporating the intensity to the light*/
     specColor *= intensity;
     ambientCol *= intensity;

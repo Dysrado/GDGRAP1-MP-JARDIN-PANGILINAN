@@ -13,7 +13,7 @@ private:
 
 
     // light
-    glm::vec3 lightPos = glm::vec3(0, 7, -100);
+    glm::vec3 lightPos = glm::vec3(0, 7,50);
     glm::vec3 lightColor = glm::vec3(1.f, 1.f, 1.f);
    // int decision = 0;
     float ambientStr = 0.1f;

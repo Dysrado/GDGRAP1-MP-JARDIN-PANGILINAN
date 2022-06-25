@@ -27,7 +27,7 @@ void Light::update(GLuint shaderProgram, GLFWwindow* window, glm::vec3 direction
     }
 
     if (type == 0) {
-        ambientStr = 1000.f;
+        ambientStr = 0.1f;
         GLuint lightTypeAddress = glGetUniformLocation(shaderProgram, "lightType");
         glUniform1i(lightTypeAddress, 0);
         
