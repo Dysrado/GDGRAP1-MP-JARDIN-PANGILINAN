@@ -81,6 +81,50 @@ int main(void)
     );
     debris1->initialize();
 
+    // Create 2nd Debris
+    Model3D* debris2 = new Model3D(
+        "3D/Models/debris2.obj",
+        "3D/Textures/debris2.png",
+        "rgba",
+        "Shaders/sample.vert",
+        "Shaders/sample.frag",
+        false, 1
+    );
+    debris2->initialize();
+
+    // Create 3rd Debris
+    Model3D* debris3 = new Model3D(
+        "3D/Models/debris3.obj",
+        "3D/Textures/debris3.png",
+        "rgba",
+        "Shaders/sample.vert",
+        "Shaders/sample.frag",
+        false, 1
+    );
+    debris3->initialize();
+
+    // Create 4th Debris
+    Model3D* debris4 = new Model3D(
+        "3D/Models/debris4.obj",
+        "3D/Textures/debris4.png",
+        "rgba",
+        "Shaders/sample.vert",
+        "Shaders/sample.frag",
+        false, 1
+    );
+    debris4->initialize();
+
+    // Create 5th Debris
+    Model3D* debris5 = new Model3D(
+        "3D/Models/5.obj",
+        "3D/Textures/debris5.png",
+        "rgba",
+        "Shaders/sample.vert",
+        "Shaders/sample.frag",
+        false, 1
+    );
+    debris5->initialize();
+
 
     // enables depth test
     glEnable(GL_DEPTH_TEST);
@@ -104,6 +148,10 @@ int main(void)
     player->initVariables(glm::vec3(0, 0, 0), glm::vec3(1, -90, 1), glm::vec3(0.005f));
     planet->initVariables(glm::vec3(0, 7, 100), glm::vec3(0, 0, 0), glm::vec3(5.f));
     debris1->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
+    debris2->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
+    debris3->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
+    debris4->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
+    debris5->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
 
     // Initialize the values needed for the camera
     pCam->initialize(glm::vec3(0, 0, 0));
@@ -168,6 +216,68 @@ int main(void)
         lightManager->update(debris1->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
         debris1->render();
 
+        // ==================================== Debris2 ====================================
+        // for the debris
+        debris2->updateUniforms();
+        
+        if (inPers) {
+            pCam->updateUniforms(debris2->getShader());
+        }
+        else {
+            oCam->updateUniforms(debris2->getShader());
+        }
+
+        // Draw debris2
+        lightManager->update(debris2->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
+        debris2->render();
+
+        
+        // ==================================== Debris3 ====================================
+        // for the debris
+        debris3->updateUniforms();
+        
+        if (inPers) {
+            pCam->updateUniforms(debris3->getShader());
+        }
+        else {
+            oCam->updateUniforms(debris3->getShader());
+        }
+
+        // Draw debris2
+        lightManager->update(debris3->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
+        debris3->render();
+        
+        // ==================================== Debris4 ====================================
+        // for the debris
+        debris4->updateUniforms();
+        
+        if (inPers) {
+            pCam->updateUniforms(debris4->getShader());
+        }
+        else {
+            oCam->updateUniforms(debris4->getShader());
+        }
+
+        // Draw debris2
+        lightManager->update(debris4->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
+        debris4->render();
+
+        
+        // ==================================== Debris5 ====================================
+        // for the debris
+        debris5->updateUniforms();
+        
+        if (inPers) {
+            pCam->updateUniforms(debris5->getShader());
+        }
+        else {
+            oCam->updateUniforms(debris5->getShader());
+        }
+
+        // Draw debris2
+        lightManager->update(debris5->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
+        debris5->render();
+
 
         // ==================================== Planet ====================================
         planet->updateUniforms();
@@ -216,6 +326,10 @@ int main(void)
     delete player;
     delete planet;
     delete debris1;
+    delete debris2;
+    delete debris3;
+    delete debris4;
+    delete debris5;
     delete pCam;
     delete oCam;
 
