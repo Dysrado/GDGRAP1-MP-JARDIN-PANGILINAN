@@ -3,18 +3,23 @@
 // initializes the camera
 void OrthoCamera::initialize(glm::vec3 centerPos)
 {
+    glm::mat4 identity(1.0f);
     // sets the camera's position on top of the center position
     this->cameraPos = glm::vec3(0,100,1);
     center = centerPos;
 
-    glm::vec3 WorldUp = glm::vec3(0, 1, 0);
-
     // sets the clipping space of the camera
-	projection = glm::ortho(-200.f, 200.f, -200.f, 200.f, 0.01f, 100.f);
+	projection = glm::ortho(-200.f, 200.f, -200.f, 200.f, 0.01f, 200.f);
 
-    glm::vec3 F = glm::normalize(centerPos - this->cameraPos);
+    cameraPosMat = glm::translate(identity, cameraPos * -1.0f); //Camera Position Matrix
+    center = glm::vec3(0.f, 3.f, 0.f); //Center Position Matrix
 
-    view = glm::lookAt(this->cameraPos, F, WorldUp);
+    F = glm::normalize(center - cameraPos); //Forward Vector
+    R = glm::normalize(glm::cross(F, WorldUp)); //Right Vector
+    U = glm::normalize(glm::cross(R, F)); //Up Vector
+
+    cameraOrientation = glm::mat4(glm::vec4(R, 0), glm::vec4(U, 0), glm::vec4((F * -1.0f), 0), glm::vec4(glm::vec3(0, 0, 0), 1)); //Camera Orientation Matrix
+    view = cameraOrientation * cameraPosMat; //View Matrix 
 }
 
 // since the camera does not move in this state then nothing happens
@@ -23,10 +28,8 @@ void OrthoCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 pos)
     // sets the camera's position on top of the center position
     this->cameraPos = glm::vec3(0, 100, 1);
 
-    glm::vec3 WorldUp = glm::vec3(0, 1, 0);
-
     // sets the clipping space of the camera
-    projection = glm::ortho(-100.f, 100.f, -100.f, 100.f, 0.01f, 100.f);
+    projection = glm::ortho(-200.f, 200.f, -200.f, 200.f, 0.01f, 200.f);
 
     glm::vec3 F = glm::normalize(center - this->cameraPos);
 
@@ -44,4 +47,14 @@ void OrthoCamera::updateUniforms(GLuint shaderProgram)
 
     GLuint camPosAddress = glGetUniformLocation(shaderProgram, "cameraPos");
     glUniform3fv(camPosAddress, 1, glm::value_ptr(this->cameraPos));
+}
+
+glm::mat4 OrthoCamera::getView()
+{
+    return view;
+}
+
+glm::mat4 OrthoCamera::getProj()
+{
+    return projection;
 }

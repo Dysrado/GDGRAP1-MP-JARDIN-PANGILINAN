@@ -146,8 +146,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Camera\MyCamera.cpp" />
     <ClCompile Include="Camera\OrthoCamera.cpp" />
     <ClCompile Include="Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="Dependencies\include\glm\detail\glm.cpp" />
@@ -161,8 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Camera\MyCamera.h" />
     <ClInclude Include="Camera\OrthoCamera.h" />
     <ClInclude Include="Camera\PerspectiveCamera.h" />
     <ClInclude Include="Dependencies\include\glm\common.hpp" />

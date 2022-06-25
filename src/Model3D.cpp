@@ -136,8 +136,6 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
         }
     }
 
-   
-
     // loads the texture into the .obj
     stbi_set_flip_vertically_on_load(true);
     tex_bytes = stbi_load(texPath.c_str(), &img_width, &img_height, &colorChannels, 0);
@@ -205,9 +203,6 @@ Model3D::Model3D(std::string path, std::string texPath, std::string rgba, std::s
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-
-   
 }
 
 Model3D::~Model3D()
@@ -282,8 +277,6 @@ void Model3D::initialize()
         glGenerateMipmap(GL_TEXTURE_2D);
         stbi_image_free(norm_bytes);
     }
-
-
 }
 
 void Model3D::initVariables(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)

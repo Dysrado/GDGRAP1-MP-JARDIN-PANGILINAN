@@ -19,14 +19,14 @@ void Skybox::bindBuffers()
 */
 //Vertices for the cube
     float skyboxVertices[]{
-        -1.f, -1.f, 1.f, //0
-        1.f, -1.f, 1.f,  //1
-        1.f, -1.f, -1.f, //2
-        -1.f, -1.f, -1.f,//3
-        -1.f, 1.f, 1.f,  //4
-        1.f, 1.f, 1.f,   //5
-        1.f, 1.f, -1.f,  //6
-        -1.f, 1.f, -1.f  //7
+        -200.f, -200.f, 200.f, //0
+        200.f, -200.f, 200.f,  //1
+        200.f, -200.f, -200.f, //2
+        -200.f, -200.f, -200.f,//3
+        -200.f, 200.f, 200.f,  //4
+        200.f, 200.f, 200.f,   //5
+        200.f, 200.f, -200.f,  //6
+        -200.f, 200.f, -200.f  //7
     };
 
     //Skybox Indices
@@ -51,14 +51,21 @@ void Skybox::bindBuffers()
     };
 
     std::string facesSkybox[]{ // fixed order
-        "Skybox/skybox_right.png",
+        /*"Skybox/skybox_right.png",
         "Skybox/skybox_left.png",
         "Skybox/skybox_up.png",
         "Skybox/skybox_down.png",
         "Skybox/skybox_front.png",
-        "Skybox/skybox_back.png",
+        "Skybox/skybox_back.png"*/
+
+        "Skybox/galaxy_rt.png",
+        "Skybox/galaxy_lf.png",
+        "Skybox/galaxy_up.png",
+        "Skybox/galaxy_dn.png",
+        "Skybox/galaxy_ft.png",
+        "Skybox/galaxy_bk.png"
     };
-    //
+    
     // Skybox shader
     glGenVertexArrays(1, &skyboxVAO);
     glGenBuffers(1, &skyboxVBO);
@@ -121,6 +128,7 @@ void Skybox::updateUniforms(glm::mat4 view, glm::mat4 projection)
     glDepthMask(GL_FALSE);
     glDepthFunc(GL_LEQUAL);
 
+    // Use the skyboxes shader
     glUseProgram(skyboxShader);
     glm::mat4 sky_view = glm::mat4(1.f);
     sky_view = glm::mat4(glm::mat3(view)); // removes translation

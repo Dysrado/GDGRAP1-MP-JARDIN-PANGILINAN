@@ -14,7 +14,6 @@
 //#include <iostream>
 
 
-//#include "Camera.h"
 #include "Camera/PerspectiveCamera.h"
 #include "Camera/OrthoCamera.h"
 #include "Skybox.h"
@@ -61,7 +60,7 @@ int main(void)
     );// Model Source: https://www.turbosquid.com/3d-models/free-3ds-model-flying-saucer/1081073#
     player->initialize();
 
-    /*Model3D* planet = new Model3D(
+    Model3D* planet = new Model3D(
         "3D/Models/sphere.obj",
         "3D/Textures/planet.jpg",
         "rgb",
@@ -69,7 +68,7 @@ int main(void)
         "Shaders/sample.frag",
         false, 0
     );
-    planet->initialize();*/
+    planet->initialize();
 
     // Create 1st Debris
     Model3D* debris1 = new Model3D(
@@ -81,6 +80,7 @@ int main(void)
         false, 1
     );
     debris1->initialize();
+
 
     // enables depth test
     glEnable(GL_DEPTH_TEST);
@@ -101,7 +101,7 @@ int main(void)
 
     // the object transform
     player->initVariables(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), glm::vec3(0.2f));
-    //planet->initVariables(glm::vec3(0, 7, -100), glm::vec3(0, 0, 0), glm::vec3(5.f));
+    planet->initVariables(glm::vec3(0, 7, -100), glm::vec3(0, 0, 0), glm::vec3(5.f));
     debris1->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
 
     // Initialize the values needed for the camera
@@ -122,23 +122,21 @@ int main(void)
         /* Current Time */
         GLfloat currTime = glfwGetTime();
         float cooldownTimer = glfwGetTime(); // Used for the cooldown for swaping cameras
-        if (cooldownTimer > lastCDTime + 0.5f) {
-            if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-                lastCDTime = glfwGetTime();
-                if (inPers) {
-                    inPers = false;
-                }
-                else {
-                    inPers = true;
-                }
-            }
-        }
+
         /* Time that has passed */
         float deltaTime = currTime - lastTime;
 
+        // ==================================== Skybox ====================================
         // Update Uniforms for the Skybox
-        skybox->updateUniforms(pCam->getView(), pCam->getProj());
+        if (inPers) {
+            skybox->updateUniforms(pCam->getView(), pCam->getProj());
+        }
+        else {
+            skybox->updateUniforms(oCam->getView(), oCam->getProj());
+        }
+        
 
+        // ==================================== Player ====================================
         // Update Uniforms for the Player Object
         player->updateUniforms();
         if (inPers) {
@@ -147,14 +145,13 @@ int main(void)
         else {
             oCam->updateUniforms(player->getShader());
         }
-
-       
         
         lightManager->update(player->getShader(), window, player->getF());
        
         // Draw Player
         player->render();
 
+        // ==================================== Debris1 ====================================
         // for the debris
         debris1->updateUniforms();
         
@@ -169,15 +166,17 @@ int main(void)
         lightManager->update(debris1->getShader(), window, player->getF());
         debris1->render();
 
-        //planet->updateUniforms();
-        //if (inPers) {
-        //    pCam->updateUniforms(planet->getShader());
-        //}
-        //else {
-        //    oCam->updateUniforms(planet->getShader());
-        //}
-        ////lightManager->update(planet->getShader());
-        //planet->render();
+
+        // ==================================== Planet ====================================
+        planet->updateUniforms();
+        if (inPers) {
+            pCam->updateUniforms(planet->getShader());
+        }
+        else {
+            oCam->updateUniforms(planet->getShader());
+        }
+        //lightManager->update(planet->getShader());
+        planet->render();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
@@ -185,18 +184,17 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
 
-        //cam->processInput(window);
-        //if (cooldownTimer > lastCDTime + 0.5f) { // in 0.5 seconds you can change cameras
-        //    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-        //        lastCDTime = glfwGetTime(); // Resets the timer
-        //        if (inPers) {
-        //            inPers = false;
-        //        }
-        //        else {
-        //            inPers = true;
-        //        }
-        //    }
-        //}
+        if (cooldownTimer > lastCDTime + 0.5f) {
+            if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+                lastCDTime = glfwGetTime();
+                if (inPers) {
+                    inPers = false;
+                }
+                else {
+                    inPers = true;
+                }
+            }
+        }
 
         if (inPers) { // Allows movement during perspective mode
             pCam->update(window, deltaTime, player->getPosition());

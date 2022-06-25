@@ -1,7 +1,13 @@
 #pragma once
-#include "MyCamera.h"
-class PerspectiveCamera :
-    public MyCamera
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include <iostream>
+class PerspectiveCamera
 {
 public:
     void initialize(glm::vec3 centerPos1);
@@ -10,12 +16,19 @@ public:
 
     // Getters
     glm::mat4 getView();
+    glm::mat4 getProj();
     glm::vec3 getF();
     glm::vec3 getR();
     glm::vec3 getU();
-    glm::mat4 getProj();
 
 private:
+    float width = 800;
+    float height = 800;
+
+    glm::mat4 projection;
+    glm::mat4 view;
+    glm::vec3 cameraPos;
+
     glm::vec3 movement;
     glm::mat4 cameraOrientation;
     glm::mat4 cameraPosMat;
@@ -24,6 +37,7 @@ private:
     float distance;
     float MOVE_SPEED = 50.f;
     glm::vec3 centerPos;
+    glm::vec3 additional;
 
     glm::vec3 WorldUp = glm::vec3(0, 1, 0);
 

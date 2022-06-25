@@ -4,40 +4,7 @@
 // initializes the camera
 void PerspectiveCamera::initialize(glm::vec3 centerPos1)
 {
- //   // Computation for the perspective and view matrix
- //   projection = glm::perspective(glm::radians(60.f), height / width, 0.1f, 100.f);
- //   distance = 40; // distance from the model to the camera
-
- //   this->centerPos = centerPos; // offset if needed
- //   cameraPos = glm::vec3(0.f, 0.f, distance);
- //   WorldUp = glm::vec3(0, 1, 0);
-
- //   // variables used for mouse input
- //   mousePosX = 0;
- //   mousePosY = 0;
- //   lastMousePosX = 0;
- //   lastMousePosY = 0;
- //   mouseOffsetX = 0;
- //   mouseOffsetY = 0;
- //   firstMouse = true;
-
- //   pitch = 0.f;
- //   yaw = 90.f;
-
- //   // sets the clipping space of the camera
- //   projection = glm::perspective(glm::radians(60.f), height / width, 0.01f, 500.f);
-
- //   // makes the F matrix dependent on the players/users mouse input
- //   glm::vec3 F = glm::vec3(0, 0, 0);
- ///*   F.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
- //   F.y = sin(glm::radians(pitch));
- //   F.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));*/
- //   F = glm::normalize(centerPos - cameraPos);
- //   F = glm::normalize(F);
- //   R = glm::normalize(glm::cross(F, WorldUp));
- //   U = glm::normalize(glm::cross(R, F));
- //   view = glm::lookAt(cameraPos, centerPos, WorldUp);
-
+    // Computation for the perspective and view matrix
     glm::mat4 identity(1.0f); //Identity Matrix
     movement.x = 0;
     movement.y = 0;
@@ -92,7 +59,7 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
         lastMousePosY = mousePosY;
 
         // Move the Yaw and Pitch
-        pitch += static_cast<GLfloat>(mouseOffsetY) * MOVE_SPEED * deltaTime;
+        pitch -= static_cast<GLfloat>(mouseOffsetY) * MOVE_SPEED * deltaTime;
         // moves the camera upwards or downwards depending on the pitch
         cameraPos.z = distance * cos(glm::radians(pitch));
         cameraPos.y = distance * sin(glm::radians(pitch));
