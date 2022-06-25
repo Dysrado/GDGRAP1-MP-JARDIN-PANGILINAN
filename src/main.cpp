@@ -72,9 +72,9 @@ int main(void)
 
     // Create 1st Debris
     Model3D* debris1 = new Model3D(
-        "3D/Models/sus.obj",
-        "3D/Textures/texture.jpg",
-        "rgb",
+        "3D/Models/debris1.obj",
+        "3D/Textures/debris1.png",
+        "rgba",
         "Shaders/sample.vert",
         "Shaders/sample.frag",
         false, 1
@@ -116,9 +116,9 @@ int main(void)
 
     // Create 5th Debris
     Model3D* debris5 = new Model3D(
-        "3D/Models/5.obj",
-        "3D/Textures/debris5.png",
-        "rgba",
+        "3D/Models/sus.obj",
+        "3D/Textures/texture.jpg",
+        "rgb",
         "Shaders/sample.vert",
         "Shaders/sample.frag",
         false, 1
@@ -147,11 +147,11 @@ int main(void)
     // the object transform
     player->initVariables(glm::vec3(0, 0, 0), glm::vec3(1, -90, 1), glm::vec3(0.005f));
     planet->initVariables(glm::vec3(0, 7, 100), glm::vec3(0, 0, 0), glm::vec3(5.f));
-    debris1->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
-    debris2->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
-    debris3->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
-    debris4->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
-    debris5->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
+    debris1->initVariables(glm::vec3(45, -5, -100), glm::vec3(0, 0, 0), glm::vec3(10.f));
+    debris2->initVariables(glm::vec3(5, -5, 160), glm::vec3(0, 0, 0), glm::vec3(10.f));
+    debris3->initVariables(glm::vec3(50, -5, 60), glm::vec3(0, 0, 0), glm::vec3(10.f));
+    debris4->initVariables(glm::vec3(150, -5,-150), glm::vec3(0, 0, 0), glm::vec3(10.f));
+    debris5->initVariables(glm::vec3(65, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.01f));
 
     // Initialize the values needed for the camera
     pCam->initialize(glm::vec3(0, 0, 0));

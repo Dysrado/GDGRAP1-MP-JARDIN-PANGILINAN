@@ -24,14 +24,14 @@ out vec4 FragColor; //Returns a Color
 //Simple shader that colors the model Red
 void main()
 {
-    if (lit == 0){
+    if (lit == 0){ //If it is an unlit object
      FragColor = texture(tex0, texCoord);
     }
-    else if (lit == 1){
+    else if (lit == 1){ //If it is a lit object
         vec3 lightDir = normalize(lightPos - fragPos);
         vec3 normal = normalize(normCoord);
 
-        if(lightType == 1){
+        if(lightType == 1){ //if the light currently being used is a spot light
             float cutoff = cos(radians(12.5f));
             float theta = dot(lightDir, normalize(-lightDirection));
             float epsilon = (cos(radians(12.5f)) - cos(radians(17.5f)));

@@ -43,9 +43,6 @@ void main()
     if (lightType == 0){
         lightDir = normalize(lightPos - fragPos);
     }
-//    else if(lightType == 1){
-//        lightDir = normalize(-lightDirection);
-//    }
 
    
     
@@ -62,10 +59,8 @@ void main()
     vec3 specColor = spec * specStr * lightColor;
      /*Attenuation*/ 
     float distance = length(lightPos - fragPos); //Distance from the Light and Object
-//    float intensity = 1.0f + 
-//        0.09f * distance +
-//        0.032f * distance * distance; // Formula of intensity given
     float intensity = clamp(10.0 / distance, 0.0, 1.0);
+
     /*Incorporating the intensity to the light*/
     specColor *= intensity;
     ambientCol *= intensity;
@@ -73,6 +68,5 @@ void main()
       FragColor = (vec4(specColor + ambientCol + diffuse, 1.0) * pixelColor);
     }
    
-    // Computation for the additional texture
   
 }

@@ -69,8 +69,7 @@ void Player::update(GLFWwindow* window, float deltaTime, bool canMove)
 glm::vec3 Player::getFront(glm::vec3 cameraPos)
 {
     glm::vec3 temp(0.f);
-    temp.x-= SPEED  * sin(glm::radians(turn));
-    temp.y = 7.f;
-    temp.z -= SPEED  * cos(glm::radians(turn));
+    temp.x -= SPEED  * cos(glm::radians(turn));
+    temp.z -= SPEED  * sin(glm::radians(turn));
     return  pos - temp;
 }

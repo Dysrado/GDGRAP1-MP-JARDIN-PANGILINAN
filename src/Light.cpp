@@ -12,7 +12,7 @@ Light::~Light()
 void Light::update(GLuint shaderProgram, glm::vec3 direction, glm::vec3 cameraPos)
 {
     if (type == 0) {
-        ambientStr = 0.5;
+        ambientStr = 0.8;
         GLuint lightTypeAddress = glGetUniformLocation(shaderProgram, "lightType");
         glUniform1i(lightTypeAddress, 0);
         
