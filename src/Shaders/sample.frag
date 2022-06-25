@@ -32,11 +32,11 @@ void main()
         vec3 normal = normalize(normCoord);
 
         if(lightType == 1){ //if the light currently being used is a spot light
-            float cutoff = cos(radians(12.5f));
-            float theta = dot(lightDir, normalize(-lightDirection));
-            float epsilon = (cos(radians(12.5f)) - cos(radians(17.5f)));
-            float intensity = clamp((theta - cos(radians(17.5f))) / epsilon, 0.0, 1.0);  
-            if(theta > cutoff){
+            float cutoff = cos(radians(12.5f)); //Represents the spotlight's radius. 
+            float theta = dot(lightDir, normalize(-lightDirection)); //The angle between the LightDir and LightDirection. 
+            float epsilon = (cos(radians(12.5f)) - cos(radians(17.5f))); 
+            float intensity = clamp((theta - cos(radians(17.5f))) / epsilon, 0.0, 1.0);  //intensity of how bright it should be depending on the distance
+            if(theta > cutoff){ //determines if its inside or outside the spotlight
                 float diff = max(dot(normal, lightDir),0.0);
                 vec3 diffuse = diff* lightColor;
     
@@ -56,7 +56,7 @@ void main()
             }
         }
     
-        if(lightType == 0){
+        if(lightType == 0){//if the light currently being used is a point light
             float diff = max(dot(normal, lightDir),0.0);
             vec3 diffuse = diff* lightColor;
     
@@ -66,6 +66,7 @@ void main()
             vec3 reflectDir = reflect(-lightDir, normal);
             float spec = pow(max(dot(reflectDir, viewDir), 0.1),specPhong);
             vec3 specColor = spec * specStr * lightColor;
+
             /*Attenuation*/ 
             float distance = length(lightPos - fragPos); //Distance from the Light and Object
             float intensity = clamp(10.0 / distance, 0.0, 1.0); // Formula of intensity given

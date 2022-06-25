@@ -23,7 +23,6 @@ protected:
 	glm::vec3 scale;
 
 private:
-	//Light* lightObj;
 	std::string rgba;
 	bool isPlayer;
 

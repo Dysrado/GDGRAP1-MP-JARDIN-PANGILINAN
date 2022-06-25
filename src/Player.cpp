@@ -64,9 +64,10 @@ void Player::update(GLFWwindow* window, float deltaTime, bool canMove)
 }
 
 glm::vec3 Player::getFront(glm::vec3 cameraPos)
-{
+{//Gets the front of the player ship
     glm::vec3 temp(0.f);
-    temp.x -= SPEED  * sin(glm::radians(turn));
-    temp.z -= SPEED  * cos(glm::radians(turn));
+    temp.x -= 70.f  * sin(glm::radians(turn));
+    temp.y = 7.f;
+    temp.z -= 70.f * cos(glm::radians(turn));
     return  pos - temp;
 }

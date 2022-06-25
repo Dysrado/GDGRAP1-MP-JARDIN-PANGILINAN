@@ -1,17 +1,6 @@
-//#include <glad/glad.h>
-//#include <GLFW/glfw3.h>
-
 #define TINYOBJLOADER_IMPLEMENTATION
-//#include "tiny_obj_loader.h"
-
 #define STB_IMAGE_IMPLEMENTATION
-//
-//#include <glm/glm.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
-//#include <glm/gtc/type_ptr.hpp>
-//
-//#include <string>
-//#include <iostream>
+
 
 
 #include "Camera/PerspectiveCamera.h"
@@ -144,13 +133,13 @@ int main(void)
     PerspectiveCamera* pCam = new PerspectiveCamera();
     OrthoCamera* oCam = new OrthoCamera();
 
-    // the object transform
+    // Object transform
     player->initVariables(glm::vec3(0, 0, 0), glm::vec3(1, -90, 1), glm::vec3(0.005f));
     planet->initVariables(glm::vec3(0, 7, 100), glm::vec3(0, 0, 0), glm::vec3(5.f));
     debris1->initVariables(glm::vec3(45, -5, -100), glm::vec3(0, 0, 0), glm::vec3(10.f));
-    debris2->initVariables(glm::vec3(5, -5, 160), glm::vec3(0, 0, 0), glm::vec3(10.f));
+    debris2->initVariables(glm::vec3(-150, -5, 75), glm::vec3(0, 0, 0), glm::vec3(10.f));
     debris3->initVariables(glm::vec3(50, -5, 60), glm::vec3(0, 0, 0), glm::vec3(10.f));
-    debris4->initVariables(glm::vec3(150, -5,-150), glm::vec3(0, 0, 0), glm::vec3(10.f));
+    debris4->initVariables(glm::vec3(150, -5,0), glm::vec3(0, 0, 0), glm::vec3(10.f));
     debris5->initVariables(glm::vec3(65, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.01f));
 
     // Initialize the values needed for the camera
@@ -164,7 +153,7 @@ int main(void)
     float lastCDTime = glfwGetTime(); // Last time the camera was swaped
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
+    while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -202,7 +191,7 @@ int main(void)
         player->render();
 
         // ==================================== Debris1 ====================================
-        // for the debris
+        // Update Uniforms for the Debris Object
         debris1->updateUniforms();
         
         if (inPers) {
@@ -217,7 +206,7 @@ int main(void)
         debris1->render();
 
         // ==================================== Debris2 ====================================
-        // for the debris
+        // Update Uniforms for the Debris Object
         debris2->updateUniforms();
         
         if (inPers) {
@@ -233,7 +222,7 @@ int main(void)
 
         
         // ==================================== Debris3 ====================================
-        // for the debris
+        // Update Uniforms for the Debris Object
         debris3->updateUniforms();
         
         if (inPers) {
@@ -243,12 +232,12 @@ int main(void)
             oCam->updateUniforms(debris3->getShader());
         }
 
-        // Draw debris2
+        // Draw debris3
         lightManager->update(debris3->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
         debris3->render();
         
         // ==================================== Debris4 ====================================
-        // for the debris
+        // Update Uniforms for the Debris Object
         debris4->updateUniforms();
         
         if (inPers) {
@@ -258,13 +247,13 @@ int main(void)
             oCam->updateUniforms(debris4->getShader());
         }
 
-        // Draw debris2
+        // Draw debris4
         lightManager->update(debris4->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
         debris4->render();
 
         
         // ==================================== Debris5 ====================================
-        // for the debris
+        // Update Uniforms for the Debris Object
         debris5->updateUniforms();
         
         if (inPers) {
@@ -274,12 +263,13 @@ int main(void)
             oCam->updateUniforms(debris5->getShader());
         }
 
-        // Draw debris2
+        // Draw debris5
         lightManager->update(debris5->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
         debris5->render();
 
 
         // ==================================== Planet ====================================
+       // Update Uniforms for the Planet Object
         planet->updateUniforms();
         if (inPers) {
             pCam->updateUniforms(planet->getShader());
@@ -287,7 +277,6 @@ int main(void)
         else {
             oCam->updateUniforms(planet->getShader());
         }
-        //lightManager->update(planet->getShader());
         planet->render();
 
         /* Swap front and back buffers */
@@ -332,6 +321,7 @@ int main(void)
     delete debris5;
     delete pCam;
     delete oCam;
+    delete lightManager;
 
     skybox->deleteBuffers();
 
