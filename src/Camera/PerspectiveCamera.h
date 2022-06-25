@@ -48,14 +48,6 @@ private:
 
     glm::vec3 WorldUp = glm::vec3(0, 1, 0);
 
-    double mousePosX;
-    double mousePosY;
-    double lastMousePosX;
-    double lastMousePosY;
-    double mouseOffsetX;
-    double mouseOffsetY;
-    bool firstMouse;
-
     GLfloat pitch;
     GLfloat yaw;
 

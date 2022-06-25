@@ -13,6 +13,7 @@ Player::~Player()
 	Model3D::~Model3D();
 }
 
+
 /* Getters and Setters */
 glm::vec3 Player::getPosition()
 {

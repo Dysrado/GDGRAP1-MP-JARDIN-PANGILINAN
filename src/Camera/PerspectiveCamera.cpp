@@ -4,19 +4,21 @@
 // initializes the camera
 void PerspectiveCamera::initialize(glm::vec3 centerPos1)
 {
+    distance = 30;
     // Computation for the perspective projection and view matrix
     glm::mat4 identity(1.0f); //Identity Matrix
-    projection = glm::perspective(glm::radians(60.0f), height / width, 0.1f, 100.f); //Projection Matrix
+    projection = glm::perspective(glm::radians(60.0f), height / width, 0.1f, 200.f); //Projection Matrix
 
     movement.x = 0;
     movement.y = 0;
     movement.z = 40.f;
 
-    cameraPos = glm::vec3(0, 0, -10); //Camera Position
+    cameraPos = glm::vec3(-distance, 0, 0); //Camera Position
     WorldUp = glm::vec3(0.f, 1.f, 0.f); //World Up Coordinates
 
     cameraPosMat = glm::translate(identity, cameraPos * -1.0f); //Camera Position Matrix
-    centerPos = glm::vec3(0.f, 3.f, 0.f); //Center Position Matrix
+    centerPos = centerPos1; //Center Position Matrix
+    //centerPos = glm::vec3(0.f, 3.f, 0.f); //Center Position Matrix
 
     F = glm::normalize(centerPos - cameraPos); //Forward Vector
     R = glm::normalize(glm::cross(F, WorldUp)); //Right Vector
@@ -96,17 +98,6 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
     //cameraPos.x = distance * cos(glm::radians(yaw)) + additional.x;
     //cameraPos.z = distance * sin(glm::radians(yaw)) + additional.z;
 
-    // clamps or limits the pitch and yaw so that the user cannot continuously rotate 
-    /*if (pitch > 90.f) {
-        pitch = 90.f;
-    }
-    else if (pitch < -90.f) {
-        pitch = -90.f;
-    }*/
-
-    /*if (yaw > 360.f || yaw < -360.f) {
-        yaw = 0.f;
-    }*/
     //}
     //else {
     //    firstMouse = true; // resets the firstMouse to initialize a new value on the mouse inputs later
@@ -123,11 +114,13 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
     U = glm::normalize(glm::cross(R, F));
     view = glm::lookAt(cameraPos, cameraPos + F, WorldUp);
 
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+    // Moves based on keyboard input //
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // Front movement
        cameraPos.x += 20.f * F.x * deltaTime;
        cameraPos.z += 20.f * F.z * deltaTime;
        //cameraPos -= 20.f * F * deltaTime;
     }
+    
 
     /*if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {*/
         glfwGetCursorPos(window, &xpos, &ypos);
@@ -143,7 +136,15 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
         lasty = ypos;
 
         yaw += xoffset * sens * deltaTime;
+        // moves the camera left or right depending on the yaw
+        /*cameraPos.x = distance * cos(glm::radians(yaw));
+        cameraPos.z = distance * sin(glm::radians(yaw));*/
+
         pitch += yoffset * sens * deltaTime;
+        // moves the camera upwards or downwards depending on the pitch
+        /*cameraPos.z = distance * cos(glm::radians(pitch));
+        cameraPos.y = distance * sin(glm::radians(pitch));*/
+
 
         /*Clamp Pitch so that it won't rotate endlessly upwards or downwards*/
         if (pitch > 89.0f)

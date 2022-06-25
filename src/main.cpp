@@ -51,7 +51,7 @@ int main(void)
     // Create Player
     // Parameters for the Model3D "obj path, texture path, rgba or rgb, .vert path, .frag path, isPlayer"
     Player* player = new Player(
-        "3D/Models/UFO.obj",
+        "3D/Models/sus.obj",
         "3D/Textures/ufo_diffuse.png",
         "rgba",
         "Shaders/player.vert",
@@ -100,13 +100,13 @@ int main(void)
     OrthoCamera* oCam = new OrthoCamera();
 
     // the object transform
-    player->initVariables(glm::vec3(0, -5, 20), glm::vec3(1, 1, 1), glm::vec3(0.2f));
+    player->initVariables(glm::vec3(0, -7, 0), glm::vec3(1, -90, 1), glm::vec3(0.05f));
     planet->initVariables(glm::vec3(0, 7, -100), glm::vec3(0, 0, 0), glm::vec3(5.f));
     debris1->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
 
     // Initialize the values needed for the camera
-    pCam->initialize(glm::vec3(0, 0, -1));
-    oCam->initialize(glm::vec3(0, 0, -1));
+    pCam->initialize(glm::vec3(0, 0, 0));
+    oCam->initialize(glm::vec3(0, 0, 0));
 
     // Disables the Cursor
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -115,7 +115,7 @@ int main(void)
     float lastCDTime = glfwGetTime(); // Last time the camera was swaped
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
