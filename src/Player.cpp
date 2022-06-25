@@ -35,12 +35,12 @@ void Player::update(GLFWwindow* window, float deltaTime, bool canMove)
 {
     // Based on the F and R move the obj accordingly
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // Move Forward
-        pos.x += F.x * SPEED * deltaTime;
-        pos.z += F.z * SPEED * deltaTime;
+        pos.x += SPEED * deltaTime * sin(glm::radians(rotation));
+        pos.z += SPEED * deltaTime * cos(glm::radians(rotation));
     }
     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) { // Move Backward
-        pos.x -= F.x * SPEED * deltaTime;
-        pos.z -= F.z * SPEED * deltaTime;
+        pos.x -= SPEED * deltaTime * sin(glm::radians(rotation));
+        pos.z -= SPEED * deltaTime * cos(glm::radians(rotation));
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // Move Right
         rotation -= deltaTime * SPEED;

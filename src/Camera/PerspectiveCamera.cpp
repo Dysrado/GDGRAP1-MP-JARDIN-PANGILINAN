@@ -115,11 +115,11 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
     view = glm::lookAt(cameraPos, cameraPos + F, WorldUp);
 
     // Moves based on keyboard input //
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // Front movement
-       cameraPos.x += 20.f * F.x * deltaTime;
-       cameraPos.z += 20.f * F.z * deltaTime;
-       //cameraPos -= 20.f * F * deltaTime;
-    }
+    //if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // Front movement
+    //   cameraPos.x += 20.f * F.x * deltaTime;
+    //   cameraPos.z += 20.f * F.z * deltaTime;
+    //   //cameraPos -= 20.f * F * deltaTime;
+    //}
     
 
     /*if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {*/
