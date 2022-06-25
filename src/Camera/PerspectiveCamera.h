@@ -32,8 +32,15 @@ private:
     glm::vec3 movement;
     glm::mat4 cameraOrientation;
     glm::mat4 cameraPosMat;
-
-
+   // glm::mat4 cameraOrientation;
+    bool mouse = false;
+    double xpos = 0.f, /*Current x Position of Mouse*/
+        lastx = 800 / 2.0f,
+        xoffset = 0.f,
+        ypos = 0.f,
+        lasty = 800 / 2.0f,
+        yoffset = 0.f;
+    GLfloat sens = 7.f;
     float distance;
     float MOVE_SPEED = 50.f;
     glm::vec3 centerPos;
