@@ -20,7 +20,7 @@ public:
     glm::vec3 getF();
     glm::vec3 getR();
     glm::vec3 getU();
-
+    glm::vec3 getCameraPos();
 private:
     float width = 800;
     float height = 800;

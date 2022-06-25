@@ -115,6 +115,11 @@ glm::vec3 PerspectiveCamera::getU()
     return this->U;
 }
 
+glm::vec3 PerspectiveCamera::getCameraPos()
+{
+    return cameraPos;
+}
+
 glm::mat4 PerspectiveCamera::getProj()
 {
     return projection;;

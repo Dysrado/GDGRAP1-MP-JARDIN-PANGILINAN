@@ -1339,7 +1339,6 @@
     <None Include="Shaders\player.vert" />
     <None Include="Shaders\sample.frag" />
     <None Include="Shaders\sample.vert" />
-    <None Include="Shaders\planet.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Skybox\rainbow_bk.png">
@@ -1360,8 +1359,5 @@
     <Image Include="Skybox\rainbow_up.png">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Shaders\planet.frag" />
   </ItemGroup>
 </Project>

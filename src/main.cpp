@@ -51,7 +51,7 @@ int main(void)
     // Create Player
     // Parameters for the Model3D "obj path, texture path, rgba or rgb, .vert path, .frag path, isPlayer"
     Player* player = new Player(
-        "3D/Models/sus.obj",
+        "3D/Models/UFO.obj",
         "3D/Textures/ufo_diffuse.png",
         "rgba",
         "Shaders/player.vert",
@@ -96,12 +96,13 @@ int main(void)
 
     // Initialize cameras
     bool inPers = true;
+    int lightType = 0;
     PerspectiveCamera* pCam = new PerspectiveCamera();
     OrthoCamera* oCam = new OrthoCamera();
 
     // the object transform
-    player->initVariables(glm::vec3(0, -7, 0), glm::vec3(1, -90, 1), glm::vec3(0.05f));
-    planet->initVariables(glm::vec3(0, 7, -100), glm::vec3(0, 0, 0), glm::vec3(5.f));
+    player->initVariables(glm::vec3(0, 0, 0), glm::vec3(1, -90, 1), glm::vec3(0.2f));
+    planet->initVariables(glm::vec3(0, 7, 100), glm::vec3(0, 0, 0), glm::vec3(5.f));
     debris1->initVariables(glm::vec3(0, -5, 20), glm::vec3(0, 0, 0), glm::vec3(0.1f));
 
     // Initialize the values needed for the camera
@@ -147,7 +148,7 @@ int main(void)
             oCam->updateUniforms(player->getShader());
         }
         
-        lightManager->update(player->getShader(), window, player->getF());
+        lightManager->update(player->getShader(), player->getFront(pCam->getCameraPos()), pCam->getCameraPos());
        
         // Draw Player
         player->render();
@@ -164,7 +165,7 @@ int main(void)
         }
 
         // Draw debris1
-        lightManager->update(debris1->getShader(), window, player->getF());
+        lightManager->update(debris1->getShader(),player->getFront(pCam->getCameraPos()), player->getPosition());
         debris1->render();
 
 
@@ -196,6 +197,8 @@ int main(void)
                 }
             }
         }
+        lightManager->updateInput(window);
+       
 
         if (inPers) { // Allows movement during perspective mode
             pCam->update(window, deltaTime, player->getPosition());
@@ -211,7 +214,7 @@ int main(void)
     }
 
     delete player;
-   // delete planet;
+    delete planet;
     delete debris1;
     delete pCam;
     delete oCam;

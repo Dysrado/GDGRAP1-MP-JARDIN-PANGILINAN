@@ -588,7 +588,6 @@
     <None Include="Dependencies\include\glm\gtx\vector_angle.inl" />
     <None Include="Dependencies\include\glm\gtx\vector_query.inl" />
     <None Include="Dependencies\include\glm\gtx\wrap.inl" />
-    <None Include="Shaders\planet.vert" />
     <None Include="Shaders\player.frag" />
     <None Include="Shaders\player.vert" />
     <None Include="Shaders\sample.frag" />
@@ -603,9 +602,6 @@
     <Image Include="Skybox\rainbow_lf.png" />
     <Image Include="Skybox\rainbow_rt.png" />
     <Image Include="Skybox\rainbow_up.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Shaders\planet.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

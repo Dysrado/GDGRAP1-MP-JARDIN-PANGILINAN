@@ -43,11 +43,14 @@ void main()
     if (lightType == 0){
         lightDir = normalize(lightPos - fragPos);
     }
-    else if(lightType == 1){
-        lightDir = normalize(-lightDirection);
-    }
+//    else if(lightType == 1){
+//        lightDir = normalize(-lightDirection);
+//    }
 
-    float diff = max(dot(normal, lightDir), 0.0);
+   
+    
+    if(lightType == 0){
+     float diff = max(dot(normal, lightDir), 0.0);
     vec3 diffuse = diff * lightColor;
 
     vec3 ambientCol = ambientColor * ambientStr;
@@ -57,8 +60,6 @@ void main()
 
     float spec = pow(max(dot(reflectDir, viewDir), 0.1), specPhong);
     vec3 specColor = spec * specStr * lightColor;
-    
-    if(lightType == 0){
      /*Attenuation*/ 
     float distance = length(lightPos - fragPos); //Distance from the Light and Object
 //    float intensity = 1.0f + 
@@ -69,8 +70,9 @@ void main()
     specColor *= intensity;
     ambientCol *= intensity;
     diffuse *= intensity;
+      FragColor = (vec4(specColor + ambientCol + diffuse, 1.0) * pixelColor);
     }
    
     // Computation for the additional texture
-    FragColor = (vec4(specColor + ambientCol + diffuse, 1.0) * pixelColor);
+  
 }

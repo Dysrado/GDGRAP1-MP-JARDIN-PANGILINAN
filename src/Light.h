@@ -6,17 +6,14 @@ class Light
 public:
     Light();
     ~Light();
-    void update(GLuint shaderProgram, GLFWwindow* window, glm::vec3 direction);
-
+    void update(GLuint shaderProgram, glm::vec3 direction, glm::vec3 cameraPos);
+    void updateInput(GLFWwindow* window);
 private:
    
 
-
-    // light
-    glm::vec3 lightPos = glm::vec3(0, 7,50);
+    glm::vec3 lightPos = glm::vec3(0, 7,100);
     glm::vec3 lightColor = glm::vec3(1.f, 1.f, 1.f);
-   // int decision = 0;
-    float ambientStr = 0.1f;
+    float ambientStr;
     glm::vec3 ambientColor = lightColor;
 
     float specStr = 0.5f;

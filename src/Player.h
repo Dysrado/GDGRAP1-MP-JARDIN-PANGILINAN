@@ -9,15 +9,15 @@ public:
 
 	// Getter and Setters
 	glm::vec3 getPosition();
-	glm::vec3 getF();
+	glm::vec3 getFront(glm::vec3 cameraPos);
 	void setF(glm::vec3 value);
 	void setR(glm::vec3 value);
 
 	void update(GLFWwindow* window, float deltaTime, bool canMove);
 
 private:
-	const float SPEED = 20.f;
-	float rotation = 0;
+	const float SPEED = 50.f;
+	float turn = 0;
 	glm::vec3 F;
 	glm::vec3 R;
 };
