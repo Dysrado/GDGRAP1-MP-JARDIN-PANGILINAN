@@ -51,19 +51,19 @@ void Skybox::bindBuffers()
     };
 
     std::string facesSkybox[]{ // fixed order
-        /*"Skybox/skybox_right.png",
+        "Skybox/skybox_right.png",
         "Skybox/skybox_left.png",
         "Skybox/skybox_up.png",
         "Skybox/skybox_down.png",
         "Skybox/skybox_front.png",
-        "Skybox/skybox_back.png"*/
+        "Skybox/skybox_back.png"
 
-        "Skybox/galaxy_rt.png",
-        "Skybox/galaxy_lf.png",
-        "Skybox/galaxy_up.png",
-        "Skybox/galaxy_dn.png",
-        "Skybox/galaxy_ft.png",
-        "Skybox/galaxy_bk.png"
+        //"Skybox/galaxy_rt.png",
+        //"Skybox/galaxy_lf.png",
+        //"Skybox/galaxy_up.png",
+        //"Skybox/galaxy_dn.png",
+        //"Skybox/galaxy_ft.png",
+        //"Skybox/galaxy_bk.png"
     };
     
     // Skybox shader

@@ -4,27 +4,43 @@
 // initializes the camera
 void PerspectiveCamera::initialize(glm::vec3 centerPos1)
 {
-    // Computation for the perspective and view matrix
+    // Computation for the perspective projection and view matrix
     glm::mat4 identity(1.0f); //Identity Matrix
+    projection = glm::perspective(glm::radians(60.0f), height / width, 0.1f, 100.f); //Projection Matrix
+
     movement.x = 0;
     movement.y = 0;
     movement.z = 40.f;
-    projection = glm::perspective(glm::radians(60.0f), height / width, 0.1f, 100.f); //Projection Matrix
-    cameraPos = glm::vec3(0,0,-10); //Camera Position
+
+    cameraPos = glm::vec3(0, 0, -10); //Camera Position
     WorldUp = glm::vec3(0.f, 1.f, 0.f); //World Up Coordinates
+
     cameraPosMat = glm::translate(identity, cameraPos * -1.0f); //Camera Position Matrix
     centerPos = glm::vec3(0.f, 3.f, 0.f); //Center Position Matrix
+
     F = glm::normalize(centerPos - cameraPos); //Forward Vector
     R = glm::normalize(glm::cross(F, WorldUp)); //Right Vector
     U = glm::normalize(glm::cross(R, F)); //Up Vector
-    cameraOrientation = glm::mat4(glm::vec4(R, 0), glm::vec4(U, 0), glm::vec4((F * -1.0f), 0), glm::vec4(glm::vec3(0, 0, 0), 1)); //Camera Orientation Matrix
-    view = cameraOrientation * cameraPosMat; //View Matrix 
 
+    //Camera Orientation Matrix and View Matrix 
+    cameraOrientation = glm::mat4(
+        glm::vec4(R, 0),
+        glm::vec4(U, 0),
+        glm::vec4((F * -1.0f), 0),
+        glm::vec4(glm::vec3(0, 0, 0),
+            1)
+    );
+    view = cameraOrientation * cameraPosMat;
+    additional = glm::vec3(0);
 }
 
-// moves the camera
+// Moves the camera
 void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 pos)
 {
+    glm::mat4 identity(1.0f);
+
+    // SUBJECT TO CHANGE ===========================================================================================================
+    cameraPosMat = glm::translate(identity, cameraPos); //Camera Position Matrix
     projection = glm::perspective(glm::radians(60.f), height / width, 0.01f, 500.f);
     F.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     F.y = sin(glm::radians(pitch));
@@ -33,57 +49,68 @@ void PerspectiveCamera::update(GLFWwindow* window, float deltaTime, glm::vec3 po
     F = glm::normalize(F);
     R = glm::normalize(glm::cross(F, WorldUp));
     U = glm::normalize(glm::cross(R, F));
+
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        cameraPos -= 20.f * F * deltaTime;
+        additional.x = cameraPos.x - 20.f * F.x * deltaTime;
+        additional.z = cameraPos.z - 20.f * F.z * deltaTime;
+        //cameraPos -= 20.f * F * deltaTime;
     }
 
-    view = glm::lookAt(cameraPos, F, WorldUp);
+    //Camera Orientation Matrix and View Matrix 
+    cameraOrientation = glm::mat4(
+        glm::vec4(R, 0),
+        glm::vec4(U, 0),
+        glm::vec4((F * -1.0f), 0),
+        glm::vec4(glm::vec3(0, 0, 0),
+            1)
+    );
+    view = cameraOrientation * cameraPosMat;
 
     /* Mouse Input */
     glfwGetCursorPos(window, &mousePosX, &mousePosY);
 
-    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+    //if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
         // initializes the starting point when the player presses the left button
-        if (firstMouse) {
-            lastMousePosX = mousePosX;
-            lastMousePosY = mousePosY;
-            firstMouse = false;
-        }
-
-        // calculations for offset
-        mouseOffsetX = mousePosX - lastMousePosX;
-        mouseOffsetY = mousePosY - lastMousePosY;
-
-        // Sets the last value of x and y
+    if (firstMouse) {
         lastMousePosX = mousePosX;
         lastMousePosY = mousePosY;
-
-        // Move the Yaw and Pitch
-        pitch -= static_cast<GLfloat>(mouseOffsetY) * MOVE_SPEED * deltaTime;
-        // moves the camera upwards or downwards depending on the pitch
-        cameraPos.z = distance * cos(glm::radians(pitch));
-        cameraPos.y = distance * sin(glm::radians(pitch));
-
-        yaw += static_cast<GLfloat>(mouseOffsetX) * MOVE_SPEED * deltaTime;
-        // moves the camera left or right depending on the yaw
-        cameraPos.x = distance * cos(glm::radians(yaw));
-        cameraPos.z = distance * sin(glm::radians(yaw));
-
-        // clamps or limits the pitch and yaw so that the user cannot continuously rotate 
-        if (pitch > 90.f) {
-            pitch = 90.f;
-        }
-        else if (pitch < -90.f) {
-            pitch = -90.f;
-        }
-
-        if (yaw > 360.f || yaw < -360.f) {
-            yaw = 0.f;
-        }
+        firstMouse = false;
     }
-    else {
-        firstMouse = true; // resets the firstMouse to initialize a new value on the mouse inputs later
+
+    // calculations for offset
+    mouseOffsetX = mousePosX - lastMousePosX;
+    mouseOffsetY = mousePosY - lastMousePosY;
+
+    // Sets the last value of x and y
+    lastMousePosX = mousePosX;
+    lastMousePosY = mousePosY;
+
+    // Move the Yaw and Pitch
+    pitch -= static_cast<GLfloat>(mouseOffsetY) * MOVE_SPEED * deltaTime;
+    // moves the camera upwards or downwards depending on the pitch
+    cameraPos.z = distance * cos(glm::radians(pitch)) + additional.z;
+    cameraPos.y = distance * sin(glm::radians(pitch));
+
+    yaw -= static_cast<GLfloat>(mouseOffsetX) * MOVE_SPEED * deltaTime;
+    // moves the camera left or right depending on the yaw
+    cameraPos.x = distance * cos(glm::radians(yaw)) + additional.x;
+    cameraPos.z = distance * sin(glm::radians(yaw)) + additional.z;
+
+    // clamps or limits the pitch and yaw so that the user cannot continuously rotate 
+    /*if (pitch > 90.f) {
+        pitch = 90.f;
     }
+    else if (pitch < -90.f) {
+        pitch = -90.f;
+    }*/
+
+    /*if (yaw > 360.f || yaw < -360.f) {
+        yaw = 0.f;
+    }*/
+    //}
+    //else {
+    //    firstMouse = true; // resets the firstMouse to initialize a new value on the mouse inputs later
+    //}
 }
 
 // updates the uniforms depending the given data (projection, view, cameraPos)
